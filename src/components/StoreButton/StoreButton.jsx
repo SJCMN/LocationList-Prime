@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router'
 
-function ListButton (props) {
+function StoreButton (props) {
     const history = useHistory();
     return (
     <button
         className={props.className}
-        onClick={() => history.push('/lists')}
+        onClick={() => history.push('/stores')}
         >
-        Lists</button>
+        Stores</button>
     );
 };
 
-export default ListButton;
+export default StoreButton;
