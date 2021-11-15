@@ -1,6 +1,7 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import ListButton from '../ListButton/ListButton'
+import StoreButton from '../StoreButton/StoreButton'
 import {useSelector} from 'react-redux';
 
 function UserPage() {
@@ -11,6 +12,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <ListButton className="btn" />
+      <StoreButton className="btn" />
       <LogOutButton className="btn" />
     </div>
   );

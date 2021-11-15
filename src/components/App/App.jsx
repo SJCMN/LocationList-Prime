@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ListPage from '../ListPage/ListPage';
+import StorePage from '../StorePage/StorePage';
 
 import './App.css';
 
@@ -67,6 +69,23 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/lists"
+          >
+            <ListPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/stores"
+          >
+            <StorePage />
+          </ProtectedRoute>
+
 
           <Route
             exact
