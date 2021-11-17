@@ -1,38 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ListComponent from '../ListComponent/ListComponent';
 
 function ListPage () {
 
     const dispatch = useDispatch();
     const [newItem, setNewItem] = useState('');
-    const storeListItem = useSelector(store => store.list);
+    const list = useSelector(store => store.list);
 
     const setItem = () => {
         console.log('getItem', newItem);
         dispatch({ type: 'GET_ITEM', payload: newItem })
     }
 
-    // useEffect(() => {
-    //     dispatch({ type: 'GET_ITEM_XY', payload: listItem.TCIN });
-    //   }, []);
+    //   console.log('in ListPage:', list);
 
     return (
-    <div className="container">
+        <div className="container">
 
-        <h2>Lists</h2>
-        <input 
-        placeholder="add item"
-        label='Item'
-        id='newItem'
-        value={newItem}
-        onChange={(e) =>  setNewItem(e.target.value) }
-        ></input>
-        <button onClick={() => setItem()}>Add Item</button>
-        { (storeListItem.status === 'empty') ? '' : 
-        <ListComponent />
-        }
-    </div>
+            <h2>Lists</h2>
+                <input 
+                placeholder="add item"
+                label='Item'
+                id='newItem'
+                value={newItem}
+                onChange={(e) =>  setNewItem(e.target.value) }
+                ></input>
+                    <button onClick={() => setItem()}>Add Item</button>
+                { list && 
+                <ListComponent list={list}/>
+                }
+        </div>
     );
 };
 

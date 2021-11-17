@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import listReducer from '../reducers/item.reducer';
+
 
 // server config
 const config = {
@@ -7,19 +9,16 @@ const config = {
     withCredentials: true,
   };
 
-
 // worker Saga: will be fired on "GET_ITEM" actions
 function* fetchItem(action) {
   try {
     let searchTerm = action.payload
-    console.log('searchTerms in fetchItem saga', searchTerm);
-
+    // console.log('searchTerms in fetchItem saga', searchTerm);
     // send search term to the list router
     const response = yield axios.get(`/api/lists/keyword/${searchTerm}`, config);
 
     // set list item with value from search api object
-    yield put({ type: 'SET_ITEM', payload: response.data 
-    });
+    yield put({ type: 'SET_ITEM', payload: response.data });    
 
   } catch (error) {
     console.log('Item get request failed', error);
@@ -27,28 +26,21 @@ function* fetchItem(action) {
 }
 
 
-// Fires on "GET_ITEM_XY"
-function* fetchItemXY (action) {
-    try {
-        let TCIN = action.payload
-        console.log('TCIN in fetchItemXY saga', TCIN);
-        
-        // send TCIN to second API
-        const response = yield axios.get(`/api/lists/TCIN/${TCIN}`, config);
-    
-        // set list item with updated X Y coordinates
-        yield put({ type: 'UPDATE_SET_ITEM', payload: response.data 
-        });
-    
-    
-      } catch (error) {
-        console.log('Item get request failed', error);
-      }
+function* fetchList() {
+  try{
+      const response = yield axios.get('/api/lists');
+      yield put({type: 'SET_LIST', payload: response.data});
+  } catch (err) {
+      console.log('Error on SET_LIST: ', err);
+      yield put({type: 'FETCH_ERROR'})
+  }
 }
+
+
 
 function* listSaga() {
   yield takeLatest('GET_ITEM', fetchItem);
-  yield takeLatest('GET_ITEM_XY', fetchItemXY)
+  yield takeLatest('GET_LIST', fetchList);
 }
 
 export default listSaga;
