@@ -13,10 +13,6 @@ function ListPage () {
         dispatch({ type: 'GET_ITEM', payload: newItem })
     }
 
-    // useEffect(() => {
-    //     dispatch({ type: 'GET_ITEM_XY', payload: listItem.TCIN });
-    //   }, []);
-
     return (
     <div className="container">
 
