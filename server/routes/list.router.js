@@ -102,7 +102,20 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
 
 });
 
+// Handles AXIOS request for all items on list
+router.get('/', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `SELECT * FROM "items";`;
+
+    pool.query(queryText)
+    .then((response) => {
+      res.send(response.rows)
+    }).catch((err) => {
+      console.log(`ERROR with GET list`, err);
+      res.sendStatus(500);
+    })
+
+})
+
 
 module.exports = router;
-
-
