@@ -117,5 +117,54 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 })
 
+// Handles AXIOS request for detlete item
+router.delete('/:id', (req, res) => {
+
+  let itemId = req.params.id;
+  let userId = req.user.id;
+
+  const queryText = 
+  `DELETE FROM "items"
+  WHERE "id" = $1
+  `
+  ;
+
+  const values = [itemId];
+
+  pool.query(queryText, values)
+  .then((result) => {
+    console.log('Delete Success');
+    res.sendStatus(200);
+  }).catch((err) => {
+    console.log('item delete error', err);
+    res.sendStatus(500);    
+  })
+
+})
+
+router.put('/toggle/:id', (req, res) => {
+
+  let itemId = req.params.id;
+
+  const queryText = `
+  UPDATE "items" SET 
+  "hidden" = NOT "hidden"
+  WHERE "id" = $1;
+  `;
+
+  const values = [itemId]
+
+  pool.query(queryText, values)
+  .then((result) => {
+    console.log('TOGGLE_HIDE success');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('TOGGLE_HIDE error', err);
+    res.sendStatus(500);    
+  })
+})
 
 module.exports = router;
+
+
+

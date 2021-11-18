@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import './ListItem.css'
 
 
 function ListItem ({item}) {
@@ -10,8 +10,16 @@ function ListItem ({item}) {
 
     return (
         
-        <li key={item.id}>
-            <p> {item.department_id}{item.aisle_id} {item.keyword_search}</p><button>archive</button>
+        <li key={item.id} >
+            <div className="listItem">
+                <button onClick={() =>  (dispatch({ type: "TOGGLE_HIDE_ITEM", payload: item.id }))}>archive</button>
+                <p> 
+                    {item.department_id}
+                    {item.aisle_id} 
+                    {item.keyword_search}
+                    </p>
+                <button onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}>delete</button>
+            </div>
         </li>
     );
 };
