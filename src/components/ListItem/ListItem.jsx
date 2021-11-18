@@ -5,6 +5,8 @@ import './ListItem.css'
 
 function ListItem ({item}) {
 
+    const mode = useSelector((store) => store.mode);
+
   
     const dispatch = useDispatch();
 
@@ -15,7 +17,7 @@ function ListItem ({item}) {
                 <button onClick={() =>  (dispatch({ type: "TOGGLE_HIDE_ITEM", payload: item.id }))}>archive</button>
      
                     <p className={item.hidden === false ? "standard" : "hidden"}> 
-                    {item.department_id} {item.aisle_id} {item.keyword_search}
+                    {(mode === 'SHOP') ? <>{item.department_id} {item.aisle_id} {item.keyword_search}</> : <>{item.keyword_search}</> }
                     
                     </p>
 

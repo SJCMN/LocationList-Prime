@@ -4,7 +4,8 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const axios = require('axios')
 
-
+// Pythagorean theorem rounded to 2 decimal places
+// calcs distance from origin to item x y
 function calcDistance(x,y) {
     distance =  Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
     return Math.round((distance + Number.EPSILON) * 100) / 100;
@@ -168,6 +169,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
+// Handles AXIOS request to hide/archive list items
 router.put('/hide/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
@@ -194,7 +196,7 @@ router.put('/hide/:id', rejectUnauthenticated, (req, res) => {
 router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 
   // let shopToggle = req.params.shop
-  console.log('shop toggle is', shopToggle);
+  // console.log('shop toggle is', shopToggle);
 
     // RETURN LIST SORTED BY DISTANCE
     const queryText = `
