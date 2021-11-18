@@ -143,7 +143,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 })
 
-// Handles AXIOS request for detlete item
+// Handles AXIOS request for delete item
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
@@ -168,7 +168,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
-router.put('/toggle/:id', rejectUnauthenticated, (req, res) => {
+router.put('/hide/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
 
@@ -186,6 +186,30 @@ router.put('/toggle/:id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(200);    
   }).catch((err) => {
     console.log('TOGGLE_HIDE error', err);
+    res.sendStatus(500);    
+  })
+})
+
+// Handles AXIOS request for sort by item location from 0,0 origin reference
+router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
+
+  // let shopToggle = req.params.shop
+  console.log('shop toggle is', shopToggle);
+
+    // RETURN LIST SORTED BY DISTANCE
+    const queryText = `
+    SELECT *
+    FROM "items"
+    ORDER BY "items"."hidden" ASC,
+    "items"."distance" ASC
+    ;`
+
+  pool.query(queryText)
+  .then((response) => {
+    console.log('TOGGLE_SHOP success');
+    res.send(response.rows);  
+  }).catch((err) => {
+    console.log('TOGGLE_SHOP error', err);
     res.sendStatus(500);    
   })
 })

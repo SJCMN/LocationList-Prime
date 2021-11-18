@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+
 
   return (
     <div className="nav">
@@ -28,9 +31,18 @@ function Nav() {
               Home
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/lists"
+            onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: 'SHOP' }))}
+            >
+              Shop
             </Link>
+
+            <Link className="navLink" to="/lists"
+             onClick={() =>  (dispatch({ type: "TOGGLE_LIST_MODE", payload: 'LIST' }))}
+            >
+              List
+            </Link>
+            
 
             <LogOutButton className="navLink" />
           </>

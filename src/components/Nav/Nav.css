@@ -1,3 +1,13 @@
+:root {
+  --independence: #555b6eff;
+  --morning-blue: #89b0aeff;
+  --powder-blue: #bee3dbff;
+  --cultured: #faf9f9ff;
+  --apricot: #ffd6baff;
+  }
+  
+
+
 .nav {
   /* flex box layout */
   display: flex;
@@ -5,7 +15,7 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: var(--powder-blue);
   overflow: hidden;
 }
 
@@ -16,15 +26,15 @@
 .nav-title {
   font-size: 24px;
   font-weight: 700;
-  color: #f2f2f2;
+  color: var(--independence);
   padding-left: 10px;
   margin: 0;
 }
 
 .navLink {
   display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: var(--independence);
+  background-color: var(--powder-blue);
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
