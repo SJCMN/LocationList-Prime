@@ -13,11 +13,12 @@ function ListItem ({item}) {
         <li key={item.id} >
             <div className="listItem">
                 <button onClick={() =>  (dispatch({ type: "TOGGLE_HIDE_ITEM", payload: item.id }))}>archive</button>
-                <p> 
-                    {item.department_id}
-                    {item.aisle_id} 
-                    {item.keyword_search}
+     
+                    <p className={item.hidden === false ? "standard" : "hidden"}> 
+                    {item.department_id} {item.aisle_id} {item.keyword_search}
+                    
                     </p>
+
                 <button onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}>delete</button>
             </div>
         </li>

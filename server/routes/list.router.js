@@ -105,7 +105,11 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
 // Handles AXIOS request for all items on list
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const queryText = `SELECT * FROM "items";`;
+    const queryText = `
+    SELECT * FROM "items"
+    ORDER BY "items"."hidden" ASC,
+    "items"."id" DESC
+    ;`;
 
     pool.query(queryText)
     .then((response) => {
