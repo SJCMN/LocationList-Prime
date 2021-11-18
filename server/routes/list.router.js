@@ -5,7 +5,13 @@ const pool = require('../modules/pool');
 const axios = require('axios')
 
 
-// Handles AXIOS request for to v2 product API information using keyword search if user is authenticated
+function calcDistance(x,y) {
+    distance =  Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
+    return Math.round((distance + Number.EPSILON) * 100) / 100;
+  }
+
+
+// Handles AXIOS request for API information using keyword and TCIN search if user is authenticated
 router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
   
 
@@ -65,15 +71,28 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                 TCIN: itemObject.product.tcin,
                 x: itemObject.product.store_coordinates[0].x,
                 y: itemObject.product.store_coordinates[0].y,
-                department_id: itemObject.product.store_coordinates[0].block
+                department_id: itemObject.product.store_coordinates[0].block,
+                
                 };
 
-            console.log('found item:', foundItem);
-            
+              // console.log('found item:', foundItem);
+              // calculate X Y coordinates from 0,0 to establish initial distance value
+              // value from distance is spread back into foundItem in res.send
+               const distance =  calcDistance(foundItem.x,foundItem.y)
+              //  console.log('calcDistance', distance);            
+
 
                 const queryText = `
-                INSERT INTO "items" ("keyword_search", "product_description", "store_id", "aisle_id", "TCIN", "x", "y", "department_id")
-                VALUES($1,$2,$3,$4,$5,$6,$7,$8);
+                INSERT INTO "items" (
+                  "keyword_search", 
+                  "product_description", 
+                  "store_id", "aisle_id", 
+                  "TCIN", 
+                  "x", 
+                  "y", 
+                  "department_id", 
+                  "distance")
+                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9);
                 `;
 
                 const values = [
@@ -85,11 +104,12 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                     foundItem.x,
                     foundItem.y,
                     foundItem.department_id,
+                    distance
                 ];
 
     pool.query(queryText, values)
         .then(response => {
-          res.send(foundItem);
+          res.send({...foundItem, distance:distance});
 
         }).catch(function (error) {
             console.error(error);
@@ -101,6 +121,8 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
     });
 
 });
+
+
 
 // Handles AXIOS request for all items on list
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -122,7 +144,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 // Handles AXIOS request for detlete item
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
   let userId = req.user.id;
@@ -146,7 +168,7 @@ router.delete('/:id', (req, res) => {
 
 })
 
-router.put('/toggle/:id', (req, res) => {
+router.put('/toggle/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
 
