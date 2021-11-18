@@ -19,7 +19,7 @@ function* fetchItem(action) {
 
     // set list item with value from search api object
     yield put({ type: 'SET_ITEM', payload: response.data });    
-
+    yield put({type: 'GET_LIST'})
   } catch (error) {
     console.log('Item get request failed', error);
   }

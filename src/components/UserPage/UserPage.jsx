@@ -10,9 +10,9 @@ function UserPage() {
   const dispatch = useDispatch();
 
 
-  useEffect(() => {
-    dispatch({ type: 'GET_LIST'});
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'GET_LIST'});
+  // }, [dispatch]);
 
   return (
     <div className="container">

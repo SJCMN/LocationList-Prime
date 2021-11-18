@@ -2,18 +2,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import ListComponent from '../ListComponent/ListComponent';
 
+
 function ListPage () {
 
     const dispatch = useDispatch();
+   
     const [newItem, setNewItem] = useState('');
     const list = useSelector(store => store.list);
 
     const setItem = () => {
-        console.log('getItem', newItem);
+        // console.log('getItem', newItem);
         dispatch({ type: 'GET_ITEM', payload: newItem })
+        // dispatch({ type: 'GET_LIST'});
+        setNewItem('')
     }
 
-    //   console.log('in ListPage:', list);
 
     return (
         <div className="container">

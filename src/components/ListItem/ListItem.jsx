@@ -11,7 +11,7 @@ function ListItem ({item}) {
     return (
         
         <li key={item.id}>
-            <p> {item.department_id}{item.aisle_id} {item.keyword_search}</p>
+            <p> {item.department_id}{item.aisle_id} {item.keyword_search}</p><button>archive</button>
         </li>
     );
 };

@@ -31,6 +31,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'GET_LIST'});
   }, [dispatch]);
 
   return (

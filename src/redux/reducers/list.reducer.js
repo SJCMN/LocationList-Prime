@@ -1,4 +1,4 @@
-const listReducer = (state = {}, action) => {
+const listReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_LIST':
         // SET LIST FROM DB TO STORE
