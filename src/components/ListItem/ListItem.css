@@ -1,0 +1,11 @@
+.listItem {
+    display:inline-block;
+}
+
+.hidden {
+    color: aqua;
+}
+
+.standard {
+    color: black;
+}

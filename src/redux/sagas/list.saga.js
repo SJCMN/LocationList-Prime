@@ -36,11 +36,33 @@ function* fetchList() {
   }
 }
 
+function* deleteItem(action) {
+    try{ 
+      yield axios.delete(`/api/lists/${action.payload}`);
+      yield put({type: 'GET_LIST'})
+  } catch (err) {
+      console.log('Error on delete: ', err);
+      yield put({type: 'DELETE_ERROR'})
+  }
+}
+
+function* toggleHide(action) {
+  try{
+    yield axios.put(`/api/lists/toggle/${action.payload}`);
+    yield put({type: 'GET_LIST'})
+  } catch (err) {
+    console.log('Error with hide toggle', err);
+    yield put({type: 'TOGGLE_HIDE_ERROR'})   
+  }
+}
+
 
 
 function* listSaga() {
   yield takeLatest('GET_ITEM', fetchItem);
   yield takeLatest('GET_LIST', fetchList);
+  yield takeLatest('DELETE_ITEM', deleteItem);
+  yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
 }
 
 export default listSaga;
