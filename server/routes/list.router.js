@@ -197,6 +197,9 @@ router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 
   // let shopToggle = req.params.shop
   // console.log('shop toggle is', shopToggle);
+  // use item id as new 0,0
+
+
 
     // RETURN LIST SORTED BY DISTANCE
     const queryText = `
