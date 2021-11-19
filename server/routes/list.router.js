@@ -123,8 +123,6 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
 
 });
 
-
-
 // Handles AXIOS request for all items on list
 router.get('/', rejectUnauthenticated, (req, res) => {
 
@@ -236,6 +234,7 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 })
 
 // Handles AXIOS request for sort by item location from 0,0 origin reference
+// Refactor to calc distance on hide on client
 router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 
   // let shopToggle = req.params.shop
@@ -265,28 +264,3 @@ router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 module.exports = router;
 
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-  // endpoint functionality
-  const item = req.body.item;
-  let itemId = req.params.id;
-
-
-
-  const queryText = `
-  UPDATE "item" SET 
-  "description"= $1,
-  "image_url" = $2
-  WHERE "id" = $3;
-  `;
-
-  const values = [item.description, item.image_url, itemId]
-
-  pool.query(queryText, values)
-  .then((result) => {
-    console.log('Update Successful!');
-    res.sendStatus(200);    
-  }).catch((err) => {
-    console.log('/shelf update error', err);
-    res.sendStatus(500);
-  })
-});

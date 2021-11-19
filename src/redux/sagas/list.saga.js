@@ -61,13 +61,13 @@ function* updateList(action) {
   console.log('in updateList', action.payload);
   
 
-  try{
-    yield axios.put(`/api/lists/update` , {list:action.payload});
-    yield put({type: 'GET_LIST'})
-  } catch (err) {
-    console.log('Error with updateList', err);
-    yield put({type: 'UPDATE_LIST_ERROR'})   
-  }
+  // try{
+  //   yield axios.put(`/api/lists/update` , {list:action.payload});
+  //   yield put({type: 'GET_LIST'})
+  // } catch (err) {
+  //   console.log('Error with updateList', err);
+  //   yield put({type: 'UPDATE_LIST_ERROR'})   
+  // }
 }
 
 function* toggleShop(action) {
