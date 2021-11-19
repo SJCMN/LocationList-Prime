@@ -26,13 +26,21 @@ Container
 Button
 -------------------------------------------------------------------------------- */
 
+:root {
+  --independence: #555b6eff;
+  --morning-blue: #89b0aeff;
+  --powder-blue: #bee3dbff;
+  --cultured: #faf9f9ff;
+  --apricot: #ffd6baff;
+  }
+
 .btn {
   display: inline-block;
   padding: 10px 20px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: var(--independence);
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -55,7 +63,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: var(--morning-blue);
   text-decoration: none;
 }
 

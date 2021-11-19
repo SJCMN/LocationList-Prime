@@ -15,7 +15,7 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: var(--powder-blue);
+  background-color: var(--independence);
   overflow: hidden;
 }
 
@@ -26,15 +26,19 @@
 .nav-title {
   font-size: 24px;
   font-weight: 700;
-  color: var(--independence);
+  color: var(--cultured);
   padding-left: 10px;
   margin: 0;
 }
 
+.nav-title:hover {
+  color: var(--apricot);
+}
+
 .navLink {
   display: inline-block;
-  color: var(--independence);
-  background-color: var(--powder-blue);
+  color: var(--cultured);
+  background-color: var(--independence);
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -48,5 +52,5 @@
 }
 
 .navLink:hover {
-  background-color: #008183;
+  background-color: var(--morning-blue);
 }

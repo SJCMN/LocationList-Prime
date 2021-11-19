@@ -192,6 +192,49 @@ router.put('/hide/:id', rejectUnauthenticated, (req, res) => {
   })
 })
 
+// Handles AXIOS request to update all items on list with new x y coordinates
+router.put('/update', rejectUnauthenticated, (req,res) => {
+
+  const list = req.body.list;
+
+
+  console.log('in update PUT', list);
+
+  for (item of list) {
+    x = item.x;
+    y = item.y;
+  }
+
+    const queryText = `
+    UPDATE "items" SET
+    SET "x" = $1, "y" = $2
+    WHERE "id" = $3;
+    `;
+
+  const values = [list.x, list.y, id]
+
+  
+
+  pool.query(queryText, values)
+  .then((result) => {
+
+    const queryText = `
+    UPDATE "items" SET
+    SET "x" = $1, "y" = $2
+    WHERE "id" = $3;
+    `;
+
+    
+    pool.query(queryText, values);
+    console.log('Update x y values success');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('Update x y values error', err);
+    res.sendStatus(500);    
+  })
+
+})
+
 // Handles AXIOS request for sort by item location from 0,0 origin reference
 router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 
@@ -222,4 +265,28 @@ router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
 module.exports = router;
 
 
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  // endpoint functionality
+  const item = req.body.item;
+  let itemId = req.params.id;
 
+
+
+  const queryText = `
+  UPDATE "item" SET 
+  "description"= $1,
+  "image_url" = $2
+  WHERE "id" = $3;
+  `;
+
+  const values = [item.description, item.image_url, itemId]
+
+  pool.query(queryText, values)
+  .then((result) => {
+    console.log('Update Successful!');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('/shelf update error', err);
+    res.sendStatus(500);
+  })
+});
