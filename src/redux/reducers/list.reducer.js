@@ -3,8 +3,8 @@ const listReducer = (state = [], action) => {
       case 'SET_LIST':
         // SET LIST FROM DB TO STORE
     return action.payload
-    case 'UPDATE_LIST_DISTANCE':
-      // UPDATE DISTANCE VALUES IN LIST
+    case 'UPDATE_DISTANCE':
+      // UPDATE DISTANCE VALUES IN LIST STORE ONLY
   return action.payload
 
       default:

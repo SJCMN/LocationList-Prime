@@ -11,9 +11,8 @@ function ListPage () {
     const list = useSelector(store => store.list);
 
     const setItem = () => {
-        // console.log('getItem', newItem);
+
         dispatch({ type: 'GET_ITEM', payload: newItem })
-        // dispatch({ type: 'GET_LIST'});
         setNewItem('')
     }
 
