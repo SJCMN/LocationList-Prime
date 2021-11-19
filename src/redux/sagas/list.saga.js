@@ -59,7 +59,7 @@ function* toggleHide(action) {
 function* updateList(action) {
 
   console.log('in updateList', action.payload);
-  
+  // yield put({type: 'UPDATE_DISTANCE'})
 
   // try{
   //   yield axios.put(`/api/lists/update` , {list:action.payload});
