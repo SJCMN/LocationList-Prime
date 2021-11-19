@@ -1,7 +1,7 @@
 const itemReducer = (state = {status:'empty'}, action) => {
     switch (action.type) {
       case 'SET_ITEM':
-        // format object with keys returned from keyword search API
+        // set value of each item when added to list
     return action.payload
 
     // case 'UPDATE_SET_ITEM':

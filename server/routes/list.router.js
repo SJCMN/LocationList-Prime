@@ -4,7 +4,8 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const axios = require('axios')
 
-
+// Pythagorean theorem rounded to 2 decimal places
+// calcs distance from origin to item x y
 function calcDistance(x,y) {
     distance =  Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
     return Math.round((distance + Number.EPSILON) * 100) / 100;
@@ -122,8 +123,6 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
 
 });
 
-
-
 // Handles AXIOS request for all items on list
 router.get('/', rejectUnauthenticated, (req, res) => {
 
@@ -143,7 +142,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 })
 
-// Handles AXIOS request for detlete item
+// Handles AXIOS request for delete item
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
@@ -168,7 +167,8 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 })
 
-router.put('/toggle/:id', rejectUnauthenticated, (req, res) => {
+// Handles AXIOS request to hide/archive list items
+router.put('/hide/:id', rejectUnauthenticated, (req, res) => {
 
   let itemId = req.params.id;
 
@@ -190,7 +190,77 @@ router.put('/toggle/:id', rejectUnauthenticated, (req, res) => {
   })
 })
 
-module.exports = router;
+// Handles AXIOS request to update all items on list with new x y coordinates
+router.put('/update', rejectUnauthenticated, (req,res) => {
 
+  const list = req.body.list;
+
+
+  console.log('in update PUT', list);
+
+  for (item of list) {
+    x = item.x;
+    y = item.y;
+  }
+
+    const queryText = `
+    UPDATE "items" SET
+    SET "x" = $1, "y" = $2
+    WHERE "id" = $3;
+    `;
+
+  const values = [list.x, list.y, id]
+
+  
+
+  pool.query(queryText, values)
+  .then((result) => {
+
+    const queryText = `
+    UPDATE "items" SET
+    SET "x" = $1, "y" = $2
+    WHERE "id" = $3;
+    `;
+
+    
+    pool.query(queryText, values);
+    console.log('Update x y values success');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('Update x y values error', err);
+    res.sendStatus(500);    
+  })
+
+})
+
+// Handles AXIOS request for sort by item location from 0,0 origin reference
+// Refactor to calc distance on hide on client
+router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
+
+  // let shopToggle = req.params.shop
+  // console.log('shop toggle is', shopToggle);
+  // use item id as new 0,0
+
+
+
+    // RETURN LIST SORTED BY DISTANCE
+    const queryText = `
+    SELECT *
+    FROM "items"
+    ORDER BY "items"."hidden" ASC,
+    "items"."distance" ASC
+    ;`
+
+  pool.query(queryText)
+  .then((response) => {
+    console.log('TOGGLE_SHOP success');
+    res.send(response.rows);  
+  }).catch((err) => {
+    console.log('TOGGLE_SHOP error', err);
+    res.sendStatus(500);    
+  })
+})
+
+module.exports = router;
 
 

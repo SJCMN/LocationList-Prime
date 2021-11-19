@@ -48,12 +48,38 @@ function* deleteItem(action) {
 
 function* toggleHide(action) {
   try{
-    yield axios.put(`/api/lists/toggle/${action.payload}`);
+    yield axios.put(`/api/lists/hide/${action.payload}`);
     yield put({type: 'GET_LIST'})
   } catch (err) {
     console.log('Error with hide toggle', err);
     yield put({type: 'TOGGLE_HIDE_ERROR'})   
   }
+}
+
+function* updateList(action) {
+
+  console.log('in updateList', action.payload);
+  
+
+  // try{
+  //   yield axios.put(`/api/lists/update` , {list:action.payload});
+  //   yield put({type: 'GET_LIST'})
+  // } catch (err) {
+  //   console.log('Error with updateList', err);
+  //   yield put({type: 'UPDATE_LIST_ERROR'})   
+  // }
+}
+
+function* toggleShop(action) {
+
+    try{
+      const response = yield axios.get(`/api/lists/shop/${action.payload}`);
+      yield put({type: 'SET_LIST', payload: response.data}); 
+    } catch (err) {
+      console.log('Error with shop toggle', err);
+      yield put({type: 'TOGGLE_SHOP_ERROR'})   
+    }
+
 }
 
 
@@ -63,6 +89,9 @@ function* listSaga() {
   yield takeLatest('GET_LIST', fetchList);
   yield takeLatest('DELETE_ITEM', deleteItem);
   yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
+  yield takeLatest('TOGGLE_SHOP_MODE', toggleShop);
+  yield takeLatest('TOGGLE_LIST_MODE', fetchList);
+  yield takeLatest('UPDATE_DISTANCE', updateList)
 }
 
 export default listSaga;
