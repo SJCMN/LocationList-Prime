@@ -1,16 +1,9 @@
-:root {
-    --independence: #555b6eff;
-    --morning-blue: #89b0aeff;
-    --powder-blue: #bee3dbff;
-    --cultured: #faf9f9ff;
-    --apricot: #ffd6baff;
-    }
 
 .listItem {
     display:inline-block;
 }
 
-.hidden {
+.hidden, .Mui-checked {
     color:  var(--independence);
 }
 

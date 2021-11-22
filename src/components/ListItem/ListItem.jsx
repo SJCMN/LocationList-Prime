@@ -1,3 +1,8 @@
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 import { useDispatch, useSelector } from 'react-redux';
 import './ListItem.css'
 
@@ -8,11 +13,11 @@ function ListItem ({item}) {
     const list = useSelector(store => store.list);
     const dispatch = useDispatch();
 
+    
+
     // List Mode: Toggles hidden to archive items on list
     // SHOP Mode: also calcs new distance relative to archived item 
     const handleUpdate = (item) => {
-
-        // console.log('in handleUpdate',item.id);
 
         // updateDistance if mode === 'SHOP'
             if(mode === 'SHOP') {
@@ -27,23 +32,21 @@ function ListItem ({item}) {
     }
 
     return (
-        
-        <li key={item.id} >
-            <div className="listItem">
-                <button onClick={() =>  handleUpdate(item)}>archive</button>
-     
-                    <p className={item.hidden === false ? "standard" : "hidden"}>
-
-                    {(mode === 'SHOP') ? 
-                    <>{item.department_id} {item.aisle_id} {item.keyword_search}</> 
-                    : 
-                    <>{item.keyword_search}</> }
-                    
-                    </p>
-
+        <FormGroup key={item.id}
+            >
+                <FormControlLabel  
+                    className={item.hidden === false ? "standard" : "hidden"}
+                    control={ <Checkbox checked={item.hidden} onClick={() =>  handleUpdate(item)} /> } 
+                    label={
+                        (mode === 'SHOP') ?
+                        <>{item.department_id} {item.aisle_id} {item.keyword_search}</>
+                        :
+                        <>{item.keyword_search}</>
+                    }
+                    color="default"
+                /> 
                 <button onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}>delete</button>
-            </div>
-        </li>
+        </FormGroup>
     );
 };
 
