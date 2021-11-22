@@ -1,7 +1,9 @@
-
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 import { useDispatch, useSelector } from 'react-redux';
 import './ListItem.css'
@@ -32,21 +34,42 @@ function ListItem ({item}) {
     }
 
     return (
-        <FormGroup key={item.id}
+
+        <ListItem key={item.id}
+            secondaryAction = {
+                <HighlightOffIcon 
+                edge="end" aria-label="delete"
+                onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))} >
+                </HighlightOffIcon>
+            }
+            disablePadding
             >
-                <FormControlLabel  
-                    className={item.hidden === false ? "standard" : "hidden"}
-                    control={ <Checkbox checked={item.hidden} onClick={() =>  handleUpdate(item)} /> } 
-                    label={
+
+                <ListItemButton  onClick={() =>  handleUpdate(item)} dense>
+                    <ListItemIcon>
+                        <Checkbox
+                            edge = "start"
+                            checked={item.hidden}  
+                            tabIndex={-1}
+                            disableRipple
+                            // inputProps={{'aria-labelledby': lableId}}
+                        /> 
+                    </ListItemIcon>
+
+                    <ListItemText 
+                    className={item.hidden === false ? "standard" : "hidden"} 
+                    // id={lableId}
+                    primary={
                         (mode === 'SHOP') ?
                         <>{item.department_id} {item.aisle_id} {item.keyword_search}</>
                         :
                         <>{item.keyword_search}</>
                     }
-                    color="default"
-                /> 
-                <button onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}>delete</button>
-        </FormGroup>
+                    />
+                </ListItemButton>
+                {/* <button onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}>delete</button> */}
+
+        </ListItem>
     );
 };
 
