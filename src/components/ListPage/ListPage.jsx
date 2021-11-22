@@ -1,21 +1,38 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ListComponent from '../ListComponent/ListComponent';
 
 
 function ListPage () {
 
     const dispatch = useDispatch();
-   
-    const [newItem, setNewItem] = useState('');
     const list = useSelector(store => store.list);
 
+    const [newItem, setNewItem] = useState('');
+    // const [ sortedList , setList ] = useState(list)
+
     const setItem = () => {
-        // console.log('getItem', newItem);
+
         dispatch({ type: 'GET_ITEM', payload: newItem })
-        // dispatch({ type: 'GET_LIST'});
-        setNewItem('')
+        setNewItem('');
     }
+
+
+
+    // useEffect hook
+    // component renders when state changes
+    // code within useEffect() function runs when component renders
+    // providing an empty array as a second argument will limit the useEffect to only run once
+    // passing in a variable into the array as a second argument 
+    // Will run contents of use effect when variable value changes
+
+    useEffect(() => {
+
+        // setList(sortedList);
+        // console.log(sortedList);
+
+    }, [])
+ 
 
 
     return (
