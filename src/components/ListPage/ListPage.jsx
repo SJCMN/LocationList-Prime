@@ -31,7 +31,7 @@ function ListPage () {
         // setList(sortedList);
         // console.log(sortedList);
 
-    }, [list])
+    }, [])
  
 
 

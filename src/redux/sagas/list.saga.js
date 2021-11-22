@@ -55,6 +55,7 @@ function* deleteItem(action) {
 function* toggleHide(action) {
   try{
     yield axios.put(`/api/lists/hide/${action.payload}`);
+    action.payload.mode === 'list'
     yield put({type: 'GET_LIST'})
   } catch (err) {
     console.log('Error with hide toggle', err);
