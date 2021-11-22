@@ -31,8 +31,9 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({ type: 'GET_LIST'});
-  }, [dispatch]);
+    // dispatch({ type: 'GET_LIST'});
+    console.log('use effect in App ran');
+  }, []);
 
   return (
     <Router>
