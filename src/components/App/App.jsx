@@ -29,10 +29,11 @@ function App() {
 
   const user = useSelector(store => store.user);
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
-    dispatch({ type: 'GET_LIST'});
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_USER' });
+  //   dispatch({ type: 'GET_LIST'});
+  //   console.log('use effect in App ran');
+  // }, []);
 
   return (
     <Router>

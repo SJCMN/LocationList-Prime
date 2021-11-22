@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
-import listReducer from '../reducers/item.reducer';
 
+ 
 
 // server config
 const config = {
@@ -18,14 +18,17 @@ function* fetchItem(action) {
     const response = yield axios.get(`/api/lists/keyword/${searchTerm}`, config);
 
     // set list item with value from search api object
-    yield put({ type: 'SET_ITEM', payload: response.data });    
+    yield put({ type: 'SET_ITEM', payload: response.data }); 
+
     yield put({type: 'GET_LIST'})
   } catch (error) {
     console.log('Item get request failed', error);
   }
 }
 
-
+// Calls to server to request list from db
+// List is always returned by order entered, grouped by hidden false, true
+// DOM renders after SET_LIST
 function* fetchList() {
   try{
       const response = yield axios.get('/api/lists');
@@ -36,6 +39,7 @@ function* fetchList() {
   }
 }
 
+// Deletes one item based on id
 function* deleteItem(action) {
     try{ 
       yield axios.delete(`/api/lists/${action.payload}`);
@@ -46,6 +50,8 @@ function* deleteItem(action) {
   }
 }
 
+// Flips boolean on item to be hidden or unhidden based on id, flips to the opposite state
+// Triggers get of list after hidden status updates
 function* toggleHide(action) {
   try{
     yield axios.put(`/api/lists/hide/${action.payload}`);
@@ -70,6 +76,8 @@ function* updateList(action) {
   // }
 }
 
+// request to server, returns list from db with initial sort by item distance from selected store 0,0
+
 function* toggleShop(action) {
 
     try{
@@ -91,7 +99,7 @@ function* listSaga() {
   yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
   yield takeLatest('TOGGLE_SHOP_MODE', toggleShop);
   yield takeLatest('TOGGLE_LIST_MODE', fetchList);
-  yield takeLatest('UPDATE_DISTANCE', updateList)
+  // yield takeLatest('UPDATE_DISTANCE', updateList)
 }
 
 export default listSaga;

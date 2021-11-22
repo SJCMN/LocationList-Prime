@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './ListItem.css'
 
@@ -8,7 +9,9 @@ function ListItem ({item}) {
     const mode = useSelector(store => store.mode);
     const list = useSelector(store => store.list);
     const dispatch = useDispatch();
-
+    
+    // useState hook
+    // const [render, setRender] = useState(false)
 
     // List Mode: Toggles hidden to archive items on list
     // SHOP Mode: also calcs new distance relative to archived item 
@@ -72,7 +75,16 @@ function ListItem ({item}) {
             }
     }
 
+
+
   
+    // useEffect(() => {
+        
+    //     console.log('use effect ListItem ran')
+    //     console.log(list)
+     
+    
+    //   }, []);
 
 
     return (
