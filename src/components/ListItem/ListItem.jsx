@@ -18,7 +18,7 @@ function ListItem ({item}) {
             if(mode === 'SHOP') {
             // DISPATCH TO REDUCER
             dispatch ({ type: "UPDATE_DISTANCE", payload: {list:list, id:item.id}})
-            // dispatch ({ type: "TOGGLE_HIDE_ITEM", payload: {id:item.id, mode:mode} })
+            dispatch ({ type: "TOGGLE_HIDE_ITEM", payload: {id:item.id, mode:mode} })
 
         } //END OF SHOP MODE LOGIC
             else {

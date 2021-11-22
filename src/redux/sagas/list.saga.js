@@ -54,9 +54,12 @@ function* deleteItem(action) {
 // Triggers get of list after hidden status updates
 function* toggleHide(action) {
   try{
-    yield axios.put(`/api/lists/hide/${action.payload}`);
-    action.payload.mode === 'list'
-    yield put({type: 'GET_LIST'})
+    if (action.payload.mode === 'SHOP'){
+    yield axios.put(`/api/lists/hide/${action.payload.id}`);}
+    else {
+      yield axios.put(`/api/lists/hide/${action.payload}`)
+      yield put({type: 'GET_LIST'})
+    }
   } catch (err) {
     console.log('Error with hide toggle', err);
     yield put({type: 'TOGGLE_HIDE_ERROR'})   

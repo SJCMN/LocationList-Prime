@@ -7,8 +7,8 @@ const listReducer = (state = [], action) => {
     case 'UPDATE_DISTANCE':
       // UPDATE DISTANCE VALUES IN LIST STORE ONLY
       // CALC DISTANCE HERE
-
-      const { id, item } = action.payload
+      let sortedList = [...state]
+      const { id } = action.payload
 
       console.log('in list reducer id:', id);
       
@@ -17,7 +17,7 @@ const listReducer = (state = [], action) => {
       let currentY;
 
       // Find X,Y coords of last archived item
-      for ( let listItem of state ) {
+      for ( let listItem of sortedList ) {
           if ( id == listItem.id) {
               currentX = listItem.x;
               currentY = listItem.y
@@ -29,7 +29,7 @@ const listReducer = (state = [], action) => {
 
       // recalculate distance values based on last item origin
       // update list object with revised x,y values
-      for ( let listItem of state ) {
+      for ( let listItem of sortedList ) {
           let distX = Math.abs(currentX - listItem.x);
           distX = Math.round((distX + Number.EPSILON) * 100) / 100
 
@@ -54,14 +54,11 @@ const listReducer = (state = [], action) => {
       }
 
       // sort the object array by distance, return new list
-      state.sort((a,b) => a.distance - b.distance)
-      state.sort((x,y) => (x.hidden===y.hidden) ? 0 : x? -1:1)
-      console.log('list sorted by distance from last hidden item',state);
+      sortedList.sort((a,b) => a.distance - b.distance)
+      sortedList.sort((x,y) => (x.hidden===y.hidden) ? 0 : x? -1:1)
+      console.log('list sorted by distance from last hidden item',sortedList);
 
-
-
-
-  return state;
+    return sortedList;
 
       default:
         return state;
