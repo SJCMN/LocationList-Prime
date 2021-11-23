@@ -17,6 +17,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ListPage from '../ListPage/ListPage';
 import StorePage from '../StorePage/StorePage';
+import ListIndex from '../ListIndex/ListIndex'
 import './App.css';
 
 function App() {
@@ -80,8 +81,17 @@ function App() {
             exact
             path="/lists"
           >
+            <ListIndex />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/list"
+          >
             <ListPage />
           </ProtectedRoute>
+
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage

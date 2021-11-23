@@ -31,16 +31,18 @@ function Nav() {
               Home
             </Link>
 
+            {/* SEND USER TO ACTIVE LIST TO SHOP */}
             <Link className="navLink" to="/lists"
             onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: 'SHOP' }))}
             >
               Shop
             </Link>
 
+            {/* SEND USER TO LIST OF LISTS */}
             <Link className="navLink" to="/lists"
              onClick={() =>  (dispatch({ type: "TOGGLE_LIST_MODE", payload: 'LIST' }))}
             >
-              List
+              Lists
             </Link>
             
 

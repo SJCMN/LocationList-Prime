@@ -1,28 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import ListMap from '../ListMap/ListMap';
+import { useState } from 'react';
+import IndexMap from '../IndexMap/IndexMap';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
 
-function ListPage () {
+function ListIndex () {
 
     const dispatch = useDispatch();
-    const list = useSelector(store => store.list);
-    const [newItem, setNewItem] = useState('');
+    const listIndex = useSelector(store => store.index);
+    const [newList, setNewList] = useState('');
 
-    const setItem = () => {
+    const setListName = () => {
 
-        dispatch({ type: 'GET_ITEM', payload: newItem })
-        setNewItem('');
+        dispatch({ type: 'SET_LIST_NAME', payload: newList })
+        setNewList('');
     }
  
 
     return (
         <div className="container">
 
-            <h2>LIST NAME</h2>
+            <h2>LISTS</h2>
             <Box
              sx={{
                 display: 'flex',
@@ -35,17 +35,17 @@ function ListPage () {
               }}
             >
                 <TextField
-                placeholder="add item"
-                label='Item'
+                placeholder="add list"
+                label='newList'
                 id='standard-basic'
                 variant="standard"
-                value={newItem}
-                onChange={(e) =>  setNewItem(e.target.value) }
-                onKeyDown={e => e.key === 'Enter' && setItem()}
+                value={newList}
+                onChange={(e) =>  setNewList(e.target.value) }
+                onKeyDown={e => e.key === 'Enter' && setListName()}
                 ></TextField>
-                    {/* <button onClick={() => setItem()}>Add Item</button> */}
-                { list && 
-                <ListMap list={list}/>
+
+                { listIndex && 
+                <IndexMap list={listIndex}/>
                 }
                 <Paper elevation={0} />
             </Box>    
@@ -53,4 +53,4 @@ function ListPage () {
     );
 };
 
-export default ListPage;
+export default ListIndex;
