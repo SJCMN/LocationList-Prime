@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 function ListIndex () {
 
     const dispatch = useDispatch();
-    const listIndex = useSelector(store => store.index);
+    const listIndex = useSelector(store => store.index.indexReducer);
     const [newList, setNewList] = useState('');
 
     const setListName = () => {
