@@ -34,9 +34,9 @@ function IndexOutput ({item}) {
 
     const sendToList = () => {
       history.push(`/lists/${item.id}`)
+      dispatch({ type: 'SET_INDEX_NAME', payload: item.list_name })
     }
 
-    console.log(currentIndex, item.id)
  
     return (
         <ListItem key={item.id} 

@@ -14,16 +14,28 @@ const currentIndex = (state = [''], action) => {
     switch (action.type) {
         case 'SET_CURRENT_INDEX':
             // ADDS CURRENT INDEX ID TO REDUCER TO GRAB LIST
-        let newIndex = action.payload
-
+            let newIndex = action.payload
             return newIndex
         default:
             return state;
     }
 };
 
+
+const indexName = ( state = [''], action ) => {
+    switch (action.type) {
+        case 'SET_INDEX_NAME':
+            // ADDS CURRENT INDEX ID TO REDUCER TO GRAB LIST
+            let name = action.payload
+            return name
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     indexReducer,
-    currentIndex
+    currentIndex,
+    indexName
 });
 
