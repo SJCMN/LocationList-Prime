@@ -9,7 +9,10 @@ import TextField from '@mui/material/TextField';
 function ListPage () {
 
     const dispatch = useDispatch();
-    const list = useSelector(store => store.list);
+
+    const indexName = useSelector(store => store.index.indexName)
+    const list = useSelector(store => store.list)
+  
     const [newItem, setNewItem] = useState('');
 
     const setItem = () => {
@@ -17,12 +20,13 @@ function ListPage () {
         dispatch({ type: 'GET_ITEM', payload: newItem })
         setNewItem('');
     }
- 
+
+
 
     return (
         <div className="container">
 
-            <h2>Lists</h2>
+            <h2>{indexName}</h2>
             <Box
              sx={{
                 display: 'flex',

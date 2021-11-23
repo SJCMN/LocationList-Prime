@@ -17,6 +17,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ListPage from '../ListPage/ListPage';
 import StorePage from '../StorePage/StorePage';
+import ListIndex from '../ListIndex/ListIndex'
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({type: 'FETCH_LIST_INDEX'})
     // dispatch({ type: 'GET_LIST'});
     console.log('use effect in App ran');
   }, []);
@@ -80,8 +82,17 @@ function App() {
             exact
             path="/lists"
           >
+            <ListIndex />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/lists/:id"
+          >
             <ListPage />
           </ProtectedRoute>
+
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
