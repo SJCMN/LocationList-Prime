@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
- 
 
 // server config
 const config = {
@@ -66,21 +65,6 @@ function* toggleHide(action) {
   }
 }
 
-function* updateList(action) {
-
-  console.log('in updateList', action.payload);
-  // yield put({type: 'UPDATE_DISTANCE'})
-
-  // try{
-  //   yield axios.put(`/api/lists/update` , {list:action.payload});
-  //   yield put({type: 'GET_LIST'})
-  // } catch (err) {
-  //   console.log('Error with updateList', err);
-  //   yield put({type: 'UPDATE_LIST_ERROR'})   
-  // }
-}
-
-// request to server, returns list from db with initial sort by item distance from selected store 0,0
 
 function* toggleShop(action) {
 
@@ -95,7 +79,6 @@ function* toggleShop(action) {
 }
 
 
-
 function* listSaga() {
   yield takeLatest('GET_ITEM', fetchItem);
   yield takeLatest('GET_LIST', fetchList);
@@ -103,7 +86,7 @@ function* listSaga() {
   yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
   yield takeLatest('TOGGLE_SHOP_MODE', toggleShop);
   yield takeLatest('TOGGLE_LIST_MODE', fetchList);
-  // yield takeLatest('UPDATE_DISTANCE', updateList)
+
 }
 
 export default listSaga;
