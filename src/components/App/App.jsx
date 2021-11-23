@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
-
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -22,13 +17,19 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ListPage from '../ListPage/ListPage';
 import StorePage from '../StorePage/StorePage';
-
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
+
+    // useEffect hook
+    // component renders when state changes
+    // code within useEffect() function runs when component renders
+    // providing an empty array as a second argument will limit the useEffect to only run once
+    // passing in a variable into the array as a second argument 
+    // Will run contents of use effect when variable value changes
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });

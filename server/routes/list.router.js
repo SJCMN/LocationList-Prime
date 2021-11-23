@@ -11,7 +11,6 @@ function calcDistance(x,y) {
     return Math.round((distance + Number.EPSILON) * 100) / 100;
   }
 
-
 // Handles AXIOS request for API information using keyword and TCIN search if user is authenticated
 router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
   
