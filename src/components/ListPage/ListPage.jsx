@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import ListComponent from '../ListComponent/ListComponent';
+import ListMap from '../ListMap/ListMap';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
@@ -64,7 +64,7 @@ function ListPage () {
                 ></TextField>
                     {/* <button onClick={() => setItem()}>Add Item</button> */}
                 { list && 
-                <ListComponent list={list}/>
+                <ListMap list={list}/>
                 }
                 <Paper elevation={0} />
             </Box>    
