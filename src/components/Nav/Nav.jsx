@@ -32,7 +32,7 @@ function Nav() {
             </Link>
 
             {/* SEND USER TO ACTIVE LIST TO SHOP */}
-            <Link className="navLink" to="/lists"
+            <Link className="navLink" to="/lists/:id"
             onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: 'SHOP' }))}
             >
               Shop

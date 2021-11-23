@@ -35,11 +35,7 @@ function IndexOutput ({item}) {
     const sendToList = () => {
       history.push(`/lists/${item.id}`)
     }
-
-   
-
-
-
+ 
     return (
         <ListItem key={item.id} 
           // className={item.hidden === false ? "standard" : "hidden"}
@@ -49,7 +45,6 @@ function IndexOutput ({item}) {
             onClick={() =>  (dispatch({ type: "DELETE_LIST_INDEX", payload: item.id }))}
             >
               <HighlightOffIcon />
-              
            
             </IconButton>
           }
