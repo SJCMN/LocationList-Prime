@@ -7,6 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { blueGrey } from '@mui/material/colors'
+import { useHistory } from 'react-router-dom'
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,27 +17,28 @@ import { useDispatch, useSelector } from 'react-redux';
 function IndexOutput ({item}) {
 
     const mode = useSelector(store => store.mode);
+    const currentIndex = useSelector(store => store.currentIndex)
     // const list = useSelector(store => store.list);
     const dispatch = useDispatch();
+    const history = useHistory()
     const accent = blueGrey['900']
 
     
 
     // List Mode: Toggles hidden to archive items on list
     // SHOP Mode: also calcs new distance relative to archived item 
-    const handleUpdate = (item) => {
-
-        // updateDistance if mode === 'SHOP'
-            if(mode === 'SHOP') {
-            // DISPATCH TO REDUCER
-            // dispatch ({ type: "UPDATE_DISTANCE", payload: {list:list, id:item.id}})
-            // dispatch ({ type: "TOGGLE_HIDE_ITEM", payload: {id:item.id, mode:mode} })
-
-        } //END OF SHOP MODE LOGIC
-            else {
-        // dispatch ({ type: "TOGGLE_HIDE_ITEM", payload: item.id })
-            }
+    const handleCurrentIndex = () => {
+      dispatch({ type: 'SET_CURRENT_INDEX', payload: item.id })
+      
     }
+
+    const sendToList = () => {
+      history.push(`/lists/${item.id}`)
+    }
+
+   
+
+
 
     return (
         <ListItem key={item.id} 
@@ -55,13 +57,12 @@ function IndexOutput ({item}) {
         >
          
           <ListItemButton 
-            onClick={() =>  handleUpdate(item)} 
+            onClick={() =>  handleCurrentIndex(item)} 
             dense>
             <ListItemIcon>
               <Checkbox
               edge="start"
-              checked={item.hidden}
-              tabIndex={-1}
+              checked={ currentIndex }
               disableRipple
               inputProps={{ 'aria-labelledby': item }}
               color="default"
@@ -69,12 +70,8 @@ function IndexOutput ({item}) {
              
               </ListItemIcon>
               <ListItemText 
-                
-                primary=
-                {(mode === 'SHOP') ? 
-                <>{item.department_id} {item.aisle_id} {item.keyword_search}</> 
-                : 
-                <>{item.list_name}</> }
+                primary= {item.list_name} 
+                onClick={() =>  sendToList()} 
               />
           </ListItemButton>
 
