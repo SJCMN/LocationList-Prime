@@ -40,11 +40,11 @@ function IndexOutput ({item}) {
 
     return (
         <ListItem key={item.id} 
-          className={item.hidden === false ? "standard" : "hidden"}
+          // className={item.hidden === false ? "standard" : "hidden"}
           secondaryAction={
             <IconButton 
             edge="end" aria-label="delete"
-            onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}
+            onClick={() =>  (dispatch({ type: "DELETE_LIST_INDEX", payload: item.id }))}
             >
               <HighlightOffIcon />
               

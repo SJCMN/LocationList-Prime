@@ -14,9 +14,6 @@ const config = {
     withCredentials: true,
   };
 
-
-
-
     console.log('in setList', action.payload)
 
   try {   
@@ -34,7 +31,7 @@ const config = {
 function* fetchIndex() {
   try{
       const response = yield axios.get('/api/index');
-      yield put({type: 'SET_NEW_LIST', payload: response.data});
+      yield put({type: 'SET_NEW_INDEX', payload: response.data});
   } catch (error) {
       console.log('Error on fetchIndex GET: ', error);
       yield put({type: 'FETCH_ERROR'})
