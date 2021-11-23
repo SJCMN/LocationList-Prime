@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import ListComponent from '../ListComponent/ListComponent';
+import ListMap from '../ListMap/ListMap';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
 
 
 function ListPage () {
@@ -39,17 +42,32 @@ function ListPage () {
         <div className="container">
 
             <h2>Lists</h2>
-                <input 
+            <Box
+             sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                '& > :not(style)': {
+                  m: 2  ,
+                //   width: 128,
+                //   height: 128,
+                },
+              }}
+            >
+                <TextField
                 placeholder="add item"
                 label='Item'
-                id='newItem'
+                id='standard-basic'
+                variant="standard"
                 value={newItem}
                 onChange={(e) =>  setNewItem(e.target.value) }
-                ></input>
-                    <button onClick={() => setItem()}>Add Item</button>
+                onKeyDown={e => e.key === 'Enter' && setItem()}
+                ></TextField>
+                    {/* <button onClick={() => setItem()}>Add Item</button> */}
                 { list && 
-                <ListComponent list={list}/>
+                <ListMap list={list}/>
                 }
+                <Paper elevation={0} />
+            </Box>    
         </div>
     );
 };

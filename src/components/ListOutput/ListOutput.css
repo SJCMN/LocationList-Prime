@@ -1,0 +1,12 @@
+
+.listItem {
+    display:inline-block;
+}
+
+.hidden, .Mui-checked {
+    color:  var(--independence);
+}
+
+.standard {
+    color: black;
+}
