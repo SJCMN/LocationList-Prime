@@ -7,6 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
+
 import { useDispatch, useSelector } from 'react-redux';
 import './ListOutput.css'
 
@@ -38,10 +39,13 @@ function ListOutput ({item}) {
     return (
         <ListItem key={item.id} 
           secondaryAction={
-            <IconButton edge="end" aria-label="delete">
-              <HighlightOffIcon >
-              onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}
-              </HighlightOffIcon>
+            <IconButton 
+            edge="end" aria-label="delete"
+            onClick={() =>  (dispatch({ type: "DELETE_ITEM", payload: item.id }))}
+            >
+              <HighlightOffIcon />
+              
+           
             </IconButton>
           }
         disablePadding
