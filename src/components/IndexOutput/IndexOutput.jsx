@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function IndexOutput ({item}) {
 
     const mode = useSelector(store => store.mode);
-    const currentIndex = useSelector(store => store.currentIndex)
+    const currentIndex = useSelector(store => store.index.currentIndex)
     // const list = useSelector(store => store.list);
     const dispatch = useDispatch();
     const history = useHistory()
@@ -35,6 +35,8 @@ function IndexOutput ({item}) {
     const sendToList = () => {
       history.push(`/lists/${item.id}`)
     }
+
+    console.log(currentIndex, item.id)
  
     return (
         <ListItem key={item.id} 
@@ -57,7 +59,7 @@ function IndexOutput ({item}) {
             <ListItemIcon>
               <Checkbox
               edge="start"
-              checked={ currentIndex }
+              checked={ currentIndex === item.id ? "checked" : ""}
               disableRipple
               inputProps={{ 'aria-labelledby': item }}
               color="default"

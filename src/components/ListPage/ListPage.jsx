@@ -10,6 +10,8 @@ function ListPage () {
 
     const dispatch = useDispatch();
     const list = useSelector(store => store.list);
+    const currentIndex = useSelector(store => store.index)
+    const indexList = useSelector(store => store.list)
     const [newItem, setNewItem] = useState('');
 
     const setItem = () => {
