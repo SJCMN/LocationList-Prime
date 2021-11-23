@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { blueGrey } from '@mui/material/colors'
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ function ListOutput ({item}) {
     const mode = useSelector(store => store.mode);
     const list = useSelector(store => store.list);
     const dispatch = useDispatch();
+    const accent = blueGrey['900']
 
     
 
@@ -38,6 +40,7 @@ function ListOutput ({item}) {
 
     return (
         <ListItem key={item.id} 
+          className={item.hidden === false ? "standard" : "hidden"}
           secondaryAction={
             <IconButton 
             edge="end" aria-label="delete"
@@ -61,11 +64,12 @@ function ListOutput ({item}) {
               tabIndex={-1}
               disableRipple
               inputProps={{ 'aria-labelledby': item }}
+              color="default"
               />
              
               </ListItemIcon>
               <ListItemText 
-                className={item.hidden === false ? "standard" : "hidden"}
+                
                 primary=
                 {(mode === 'SHOP') ? 
                 <>{item.department_id} {item.aisle_id} {item.keyword_search}</> 
