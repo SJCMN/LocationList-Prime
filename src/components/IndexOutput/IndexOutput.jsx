@@ -59,7 +59,7 @@ function IndexOutput ({item}) {
             <ListItemIcon>
               <Checkbox
               edge="start"
-              checked={ currentIndex === item.id ? "checked" : ""}
+              checked={ currentIndex === item.id ? true : ""}
               disableRipple
               inputProps={{ 'aria-labelledby': item }}
               color="default"
