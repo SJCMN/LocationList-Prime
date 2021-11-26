@@ -7,17 +7,18 @@ const pool = require('../modules/pool');
 
 // POST NEW LIST
 router.post('/',  (req,res) => {
-    console.log('in index POST route',req.body)
+    console.log('in index POST route',req.body, req.user.id)
 
     const newList = req.body.newList
+    const values = [newList, req.user.id]
 
     const queryText = `
                 INSERT INTO "lists" 
-                  ("list_name")
-                VALUES ($1);
+                  ("list_name", "user_id")
+                VALUES ($1,$2);
                 `;
 
-    pool.query(queryText, [newList])
+    pool.query(queryText, values)
     .then((result) => {
         res.sendStatus(200)
     }).catch((error) => {

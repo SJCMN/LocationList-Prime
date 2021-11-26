@@ -33,7 +33,7 @@ function* fetchIndex() {
       yield put({type: 'SET_NEW_INDEX_NAME', payload: response.data});
       // send array to saga to pull out newest index id
       yield put({type: 'SET_NEW_INDEX', payload: response.data})
-
+      // yield axios.post('/api/index', {newList: action.payload}, config);
   } catch (error) {
       console.log('Error on fetchIndex GET: ', error);
       yield put({type: 'FETCH_ERROR'})
