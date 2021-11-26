@@ -60,7 +60,7 @@ function ListOutput ({item}) {
             <ListItemIcon>
               <Checkbox
               edge="start"
-              checked={item.hidden}
+              checked={item.hidden ? true : false}
               tabIndex={-1}
               disableRipple
               inputProps={{ 'aria-labelledby': item }}

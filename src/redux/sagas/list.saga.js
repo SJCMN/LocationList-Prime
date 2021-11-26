@@ -18,12 +18,14 @@ function* fetchItem(action) {
 
     // set list item with value from search api object
     yield put({ type: 'SET_ITEM', payload: response.data }); 
-
+    
+    
     yield put({type: 'GET_LIST'})
   } catch (error) {
     console.log('Item get request failed', error);
   }
 }
+
 
 // Calls to server to request list from db
 // List is always returned by order entered, grouped by hidden false, true
@@ -31,10 +33,21 @@ function* fetchItem(action) {
 function* fetchList() {
   try{
       const response = yield axios.get('/api/lists');
+      // console.log('in fetchList', response.data)
       yield put({type: 'SET_LIST', payload: response.data});
+      // yield put({ type: 'SET_LIST_ITEM_TABLE', payload: action.payload})
   } catch (err) {
       console.log('Error on SET_LIST: ', err);
       yield put({type: 'FETCH_ERROR'})
+  }
+}
+
+function* setListItemTable (action) {
+  try{
+    yield axios.post('/api/list/item_table', {item: action.payload})
+  } catch (error) {
+    console.log('ERROR in listItemTable POST', error);
+    
   }
 }
 
@@ -86,7 +99,7 @@ function* listSaga() {
   yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
   yield takeLatest('TOGGLE_SHOP_MODE', toggleShop);
   yield takeLatest('TOGGLE_LIST_MODE', fetchList);
-
+  yield takeLatest('SET_LIST_ITEM_TABLE', setListItemTable)
 }
 
 export default listSaga;

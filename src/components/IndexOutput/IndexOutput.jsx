@@ -18,7 +18,6 @@ function IndexOutput ({item}) {
 
     const mode = useSelector(store => store.mode);
     const currentIndex = useSelector(store => store.index.currentIndex)
-    // const list = useSelector(store => store.list);
     const dispatch = useDispatch();
     const history = useHistory()
     const accent = blueGrey['900']
@@ -28,13 +27,13 @@ function IndexOutput ({item}) {
     // List Mode: Toggles hidden to archive items on list
     // SHOP Mode: also calcs new distance relative to archived item 
     const handleCurrentIndex = () => {
-      dispatch({ type: 'SET_CURRENT_INDEX', payload: item.id })
+      dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
       
     }
 
     const sendToList = () => {
       history.push(`/lists/${item.id}`)
-      dispatch({ type: 'SET_INDEX_NAME', payload: item.list_name })
+      dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
     }
 
  
@@ -59,7 +58,7 @@ function IndexOutput ({item}) {
             <ListItemIcon>
               <Checkbox
               edge="start"
-              checked={ currentIndex === item.id ? true : ""}
+              checked={ currentIndex === item.id ? true : false}
               disableRipple
               inputProps={{ 'aria-labelledby': item }}
               color="default"

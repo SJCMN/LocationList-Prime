@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 
-// worker Saga: will be fired on "GET_ITEM" actions
+// adds new list name to db
 function* setList(action) {
 
 // server config
@@ -13,9 +13,7 @@ const config = {
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true,
   };
-
-    console.log('in setList', action.payload)
-
+    // console.log('in setList', action.payload)
   try {   
     yield axios.post('/api/index', {newList: action.payload}, config);
     yield put({ type: 'FETCH_LIST_INDEX'}); 
@@ -31,7 +29,11 @@ const config = {
 function* fetchIndex() {
   try{
       const response = yield axios.get('/api/index');
-      yield put({type: 'SET_NEW_INDEX', payload: response.data});
+      // send array from db to saga
+      yield put({type: 'SET_NEW_INDEX_NAME', payload: response.data});
+      // send array to saga to pull out newest index id
+      yield put({type: 'SET_NEW_INDEX', payload: response.data})
+
   } catch (error) {
       console.log('Error on fetchIndex GET: ', error);
       yield put({type: 'FETCH_ERROR'})
