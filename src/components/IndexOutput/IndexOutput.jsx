@@ -28,11 +28,12 @@ function IndexOutput ({item}) {
     // SHOP Mode: also calcs new distance relative to archived item 
     const handleCurrentIndex = () => {
       dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
-      
+      dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
     }
 
     const sendToList = () => {
       history.push(`/lists/${item.id}`)
+      dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
       dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
     }
 
