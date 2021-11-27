@@ -61,7 +61,7 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
             console.log('server v3 request response:',response.data.data);
 
             const itemObject = response.data.data;
-
+            // this will crash on some items like 'gravy' when missing object key
             // format data for store and db
             const foundItem  = {
                 keyword_search: searchTerm,

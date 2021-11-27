@@ -24,7 +24,8 @@ function ListPage() {
      
         console.log('currentItem currentIndex values ListPage', currentItem, currentIndex) 
         setTimeout(() => {
-            dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })
+            if(currentItem && 
+            dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })){}
         }, 2000); 
         
      
