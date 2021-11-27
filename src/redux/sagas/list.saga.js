@@ -11,10 +11,13 @@ const config = {
 // worker Saga: will be fired on "GET_ITEM" actions
 function* fetchItem(action) {
   try {
-    let searchTerm = action.payload
+    let searchTerm = action.payload.newItem
+    let currentIndex = action.payload.currentIndex
+    console.log('in fetchItem list saga currentIndex:', currentIndex)
+    // add list id here
     // console.log('searchTerms in fetchItem saga', searchTerm);
     // send search term to the list router
-    const response = yield axios.get(`/api/lists/keyword/${searchTerm}`, config);
+    const response = yield axios.get(`/api/lists/keyword/${searchTerm}/${currentIndex}`, config);
 
     // set list item with value from search api object
     yield put({ type: 'SET_ITEM', payload: response.data }); 

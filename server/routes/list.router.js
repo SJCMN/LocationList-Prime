@@ -12,11 +12,12 @@ function calcDistance(x,y) {
   }
 
 // Handles AXIOS request for API information using keyword and TCIN search if user is authenticated
-router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
+router.get('/keyword/:searchTerm/:currentIndex', rejectUnauthenticated, (req, res) => {
   
 
     let searchTerm = req.params.searchTerm
-    console.log('in searchTerm GET', searchTerm)
+    let currentIndex = req.params.currentIndex
+    console.log('in searchTerm GET', searchTerm, currentIndex)
 
     const options = {
         method: 'GET',
@@ -91,8 +92,9 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                   "x", 
                   "y", 
                   "department_id", 
-                  "distance")
-                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9);
+                  "distance",
+                  "list_id")
+                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
                 `;
 
                 const values = [
@@ -104,7 +106,8 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                     foundItem.x,
                     foundItem.y,
                     foundItem.department_id,
-                    distance
+                    distance,
+                    currentIndex
                 ];
 
     pool.query(queryText, values)

@@ -20,13 +20,13 @@ function ListPage() {
 
     const setItem = () => {
               
-        dispatch({ type: 'GET_ITEM', payload: newItem });
+        dispatch({ type: 'GET_ITEM', payload: {newItem:newItem, currentIndex:currentIndex} });
      
-        console.log('currentItem currentIndex values ListPage', currentItem, currentIndex) 
-        setTimeout(() => {
-            if(currentItem && 
-            dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })){}
-        }, 2000); 
+        // console.log('currentItem currentIndex values ListPage', currentItem, currentIndex) 
+        // setTimeout(() => {
+        //     if(currentItem && 
+        //     dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })){}
+        // }, 2000); 
         
      
         setNewItem('');
