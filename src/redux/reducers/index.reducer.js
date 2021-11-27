@@ -13,11 +13,11 @@ const indexReducer = (state = [''], action) => {
 const currentIndex = (state = [''], action) => {
     switch (action.type) {
         case 'SET_SELECTED_INDEX':
-            // ADDS CURRENT INDEX ID TO REDUCER TO GRAB LIST
+            // ADDS CURRENT INDEX ID TO REDUCER 
             let selectedIndex = action.payload
             return selectedIndex
         case 'SET_NEW_INDEX':
-            // ADDS CURRENT INDEX ID TO REDUCER TO GRAB LIST
+            // ADDS CURRENT INDEX ID TO REDUCER 
             let newIndexArr = action.payload
             let newIndex = newIndexArr[newIndexArr.length-1]
             return newIndex.id
@@ -30,9 +30,8 @@ const currentIndex = (state = [''], action) => {
 const indexName = ( state = [''], action ) => {
     switch (action.type) {
         case 'SET_SELECTED_INDEX_NAME':
-            // ADDS CURRENT INDEX ID TO REDUCER TO GRAB LIST
+            // ADDS CURRENT INDEX NAME TO REDUCER 
             let name = action.payload
-            console.log('in indexName indexReducer', name)
             return name
         default:
             return state;

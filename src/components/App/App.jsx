@@ -35,8 +35,8 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({type: 'FETCH_LIST_INDEX'})
-    // dispatch({ type: 'GET_LIST'});
-    console.log('use effect in App ran');
+    
+    // console.log('use effect in App ran');
   }, []);
 
   return (

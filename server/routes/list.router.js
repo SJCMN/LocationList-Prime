@@ -232,6 +232,33 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 
 })
 
+// Handles AXIOS request to update the last list item with a list id
+router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
+
+  const index = req.body.currentIndex;
+  const item = req.params.id
+
+  console.log('in updateIndex PUT index, item', index, item);
+
+    const queryText = `
+    UPDATE "items" SET
+    SET "list_id" = $1
+    WHERE "id" = $2;
+    `;
+
+  const values = [index, item]
+
+  pool.query(queryText, values)
+  .then((result) => {
+    console.log('Update list_id success');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('Update list_id error', err);
+    res.sendStatus(500);    
+  })
+
+})
+
 // Handles AXIOS request for sort by item location from 0,0 origin reference
 // Refactor to calc distance on hide on client
 router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {

@@ -14,36 +14,25 @@ function ListPage() {
     const indexName = useSelector(store => store.index.indexName)
     const currentIndex = useSelector(store => store.index.currentIndex)
     const list = useSelector(store => store.list)
-
-    const [newItem, setNewItem] = useState('');
-    // const [listId, setListId] = useState(currentIndex);
-    // const [itemId, setItemId] = useState('')
-
-    // const listItem = {
-    //     list_id: currentIndex,
-    //     newItem: newItem
-    // }
-
+    const currentItem = useSelector(store => store.list[0])
     
+    const [newItem, setNewItem] = useState('');
 
     const setItem = () => {
               
-       
-        dispatch({ type: 'GET_ITEM', payload: newItem})
-        dispatch({ type: 'SET_LIST_ITEM_TABLE', payload: currentIndex})
-        // console.log('in setItem', listId, currentIndex)
-        
-        // setListId(currentIndex);
-        // setItemId(list[0].id)  
+        dispatch({ type: 'GET_ITEM', payload: newItem });
+     
+        console.log('currentItem currentIndex values ListPage', currentItem, currentIndex)  
+        dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })
+     
+        // dispatch({ type: 'SET_LIST_INDEX_ID', payload: {currentIndex:currentIndex, newItem:newItem}});
         setNewItem('');
     }
 
-
     // useEffect(() => {
-    
-    //     console.log('use effect in ListPage ran');
-    //     console.log('value of listItem from setItem', listItem)
-    //   }, []);
+            
+    // }, []);
+
 
     return (
         <div className="container">

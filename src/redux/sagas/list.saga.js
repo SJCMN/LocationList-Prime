@@ -42,14 +42,7 @@ function* fetchList() {
   }
 }
 
-function* setListItemTable (action) {
-  try{
-    yield axios.post('/api/list/item_table', {item: action.payload})
-  } catch (error) {
-    console.log('ERROR in listItemTable POST', error);
-    
-  }
-}
+
 
 // Deletes one item based on id
 function* deleteItem(action) {
@@ -78,6 +71,20 @@ function* toggleHide(action) {
   }
 }
 
+// add list index id to item
+function* setListIndexId (action) {
+  try{
+
+    console.log('setListIndex in list saga', action.payload)
+    yield axios.put(`/api/lists/updateIndex/${action.payload.currentItem}`, action.payload.currentIndex)
+    
+
+    yield put({type: 'GET_LIST'})
+  } catch (error) {
+    console.log('ERROR in listItemTable POST', error);
+    
+  }
+}
 
 function* toggleShop(action) {
 
@@ -92,6 +99,8 @@ function* toggleShop(action) {
 }
 
 
+
+
 function* listSaga() {
   yield takeLatest('GET_ITEM', fetchItem);
   yield takeLatest('GET_LIST', fetchList);
@@ -99,7 +108,7 @@ function* listSaga() {
   yield takeLatest('TOGGLE_HIDE_ITEM', toggleHide)
   yield takeLatest('TOGGLE_SHOP_MODE', toggleShop);
   yield takeLatest('TOGGLE_LIST_MODE', fetchList);
-  yield takeLatest('SET_LIST_ITEM_TABLE', setListItemTable)
+  yield takeLatest('SET_LIST_INDEX_ID', setListIndexId)
 }
 
 export default listSaga;

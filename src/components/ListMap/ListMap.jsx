@@ -7,25 +7,7 @@ import List from '@mui/material/List';
 
 
 function ListMap ({list}) {
-
-    const indexName = useSelector(store => store.index.indexName)
-    const currentIndex = useSelector(store => store.index.currentIndex)
-    
-  
-    const [listId, setListId] = useState(currentIndex);
-    const [itemId, setItemId] = useState('')
-    
-    const listItem = {
-        list_id: listId,
-        item_id: itemId
-    }
-
-
-    useEffect(() => {
-    
-        console.log('use effect in ListMap ran');
-        console.log('value of listItem from setItem', listItem)
-      }, []);
+ 
 
     return (
        
