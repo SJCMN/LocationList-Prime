@@ -6,8 +6,12 @@ const listReducer = (state = [], action) => {
 
         case 'SORT_BY_LIST_NAME':
             // SORT LIST ITEMS BASED ON NAME OF LIST INTO STATE BEFORE DISTANCE SORT
-            let namedList = []
-            return namedList
+
+            const index = action.payload;
+            const namedList = state.filter(item => item.list_id === index)
+            console.log('in list reducer SORT_BY_LIST_NAME index:', index, namedList)
+
+            return namedList;
 
 
         case 'UPDATE_DISTANCE':

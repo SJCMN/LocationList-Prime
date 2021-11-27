@@ -35,6 +35,7 @@ function IndexOutput({ item }) {
     history.push(`/lists/${item.id}`)
     dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
     dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+    dispatch({ type: 'SORT_BY_LIST_NAME', payload: currentIndex})
   }
 
 
