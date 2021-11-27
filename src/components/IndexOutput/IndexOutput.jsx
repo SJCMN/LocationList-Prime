@@ -14,67 +14,67 @@ import { useDispatch, useSelector } from 'react-redux';
 // import './ListOutput.css'
 
 
-function IndexOutput ({item}) {
+function IndexOutput({ item }) {
 
-    const mode = useSelector(store => store.mode);
-    const currentIndex = useSelector(store => store.index.currentIndex)
-    const dispatch = useDispatch();
-    const history = useHistory()
-    const accent = blueGrey['900']
+  const mode = useSelector(store => store.mode);
+  const currentIndex = useSelector(store => store.index.currentIndex)
+  const dispatch = useDispatch();
+  const history = useHistory()
+  const accent = blueGrey['900']
 
-    
 
-    // List Mode: Toggles hidden to archive items on list
-    // SHOP Mode: also calcs new distance relative to archived item 
-    const handleCurrentIndex = () => {
-      dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
-      dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-    }
 
-    const sendToList = () => {
-      history.push(`/lists/${item.id}`)
-      dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
-      dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-    }
+  // List Mode: Toggles hidden to archive items on list
+  // SHOP Mode: also calcs new distance relative to archived item 
+  const handleCurrentIndex = () => {
+    dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
+    dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+  }
 
- 
-    return (
-        <ListItem key={item.id} 
-          // className={item.hidden === false ? "standard" : "hidden"}
-          secondaryAction={
-            <IconButton 
-            edge="end" aria-label="delete"
-            onClick={() =>  (dispatch({ type: "DELETE_LIST_INDEX", payload: item.id }))}
-            >
-              <HighlightOffIcon />
-           
-            </IconButton>
-          }
-        disablePadding
+  const sendToList = () => {
+    history.push(`/lists/${item.id}`)
+    dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
+    dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+  }
+
+
+  return (
+    <ListItem key={item.id}
+      // className={item.hidden === false ? "standard" : "hidden"}
+      secondaryAction={
+        <IconButton
+          edge="end" aria-label="delete"
+          onClick={() => (dispatch({ type: "DELETE_LIST_INDEX", payload: item.id }))}
         >
-         
-          <ListItemButton 
-            onClick={() =>  handleCurrentIndex(item)} 
-            dense>
-            <ListItemIcon>
-              <Checkbox
-              edge="start"
-              checked={ currentIndex === item.id ? true : false}
-              disableRipple
-              inputProps={{ 'aria-labelledby': item }}
-              color="default"
-              />
-             
-              </ListItemIcon>
-              <ListItemText 
-                primary= {item.list_name} 
-                onClick={() =>  sendToList()} 
-              />
-          </ListItemButton>
+          <HighlightOffIcon />
 
-        </ListItem>
+        </IconButton>
+      }
+      disablePadding
+    >
 
-    );
+      <ListItemButton
+        onClick={() => handleCurrentIndex(item)}
+        dense>
+        <ListItemIcon>
+          <Checkbox
+            edge="start"
+            checked={currentIndex === item.id ? true : false}
+            disableRipple
+            inputProps={{ 'aria-labelledby': item }}
+            color="default"
+          />
+
+        </ListItemIcon>
+        <ListItemText
+          primary={item.list_name}
+          onClick={() => sendToList()}
+        />
+      </ListItemButton>
+
+    </ListItem>
+
+  );
 };
 
 export default IndexOutput;

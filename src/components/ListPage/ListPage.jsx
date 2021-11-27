@@ -14,12 +14,12 @@ function ListPage() {
     const indexName = useSelector(store => store.index.indexName)
     const currentIndex = useSelector(store => store.index.currentIndex)
     const list = useSelector(store => store.list)
-    
+
     const [newItem, setNewItem] = useState('');
 
     const setItem = () => {
-              
-        dispatch({ type: 'GET_ITEM', payload: {newItem:newItem, currentIndex:currentIndex} });
+
+        dispatch({ type: 'GET_ITEM', payload: { newItem: newItem, currentIndex: currentIndex } });
         setNewItem('');
     }
 
