@@ -75,6 +75,7 @@ function* toggleHide(action) {
 }
 
 // add list index id to item
+// REFACTOR THIS CODE TO BE USED FOR UPDATING AN ITEM TO ANOTHER LIST
 function* setListIndexId (action) {
   try{
 

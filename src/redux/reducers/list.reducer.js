@@ -27,9 +27,16 @@ const listReducer = (state = [], action) => {
 
       console.log('in updateDistance new origin', currentX, currentY);
 
+      // filter out unhidden items from list to evaluate new distance
+      // filter out hidden items to be added back into list after distance calc
+
+      const unhiddenlistItems = sortedList.filter(item => item.hidden === false)
+      const hiddenItems = sortedList.filter(item => item.hidden === true)
+      console.log('sorted list filtered by hidden value', unhiddenlistItems, hiddenItems)
+
       // recalculate distance values based on last item origin
       // update list object with revised x,y values
-      for ( let listItem of sortedList ) {
+      for ( let listItem of unhiddenlistItems ) {
           let distX = Math.abs(currentX - listItem.x);
           distX = Math.round((distX + Number.EPSILON) * 100) / 100
 
@@ -54,11 +61,11 @@ const listReducer = (state = [], action) => {
       }
 
       // sort the object array by distance, return new list
-      sortedList.sort((a,b) => a.distance - b.distance)
-      sortedList.sort((x,y) => (x.hidden===y.hidden) ? 0 : x? -1:1)
-      console.log('list sorted by distance from last hidden item',sortedList);
+      unhiddenlistItems.sort((a,b) => a.distance - b.distance)
 
-    return sortedList;
+      console.log('list sorted by distance from last hidden item', unhiddenlistItems, hiddenItems);
+
+    return [...unhiddenlistItems, ...hiddenItems];
 
       default:
         return state;

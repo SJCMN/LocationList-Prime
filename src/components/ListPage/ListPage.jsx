@@ -14,28 +14,14 @@ function ListPage() {
     const indexName = useSelector(store => store.index.indexName)
     const currentIndex = useSelector(store => store.index.currentIndex)
     const list = useSelector(store => store.list)
-    const currentItem = useSelector(store => store.list[0])
     
     const [newItem, setNewItem] = useState('');
 
     const setItem = () => {
               
         dispatch({ type: 'GET_ITEM', payload: {newItem:newItem, currentIndex:currentIndex} });
-     
-        // console.log('currentItem currentIndex values ListPage', currentItem, currentIndex) 
-        // setTimeout(() => {
-        //     if(currentItem && 
-        //     dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })){}
-        // }, 2000); 
-        
-     
         setNewItem('');
     }
-
-    // useEffect(() => {
-            
-    // }, []);
-
 
     return (
         <div className="container">

@@ -236,6 +236,7 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 })
 
 // Handles AXIOS request to update the last list item with a list id
+// REFACTOR THIS CODE TO BE USED TO UPDATE AN ITEM TO ANOTHER LIST
 router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
 
   const index = req.body.index;
