@@ -45,6 +45,7 @@ function* deleteIndex(action) {
     try{ 
       yield axios.delete(`/api/index/${action.payload}`);
       yield put({type: 'FETCH_LIST_INDEX'})
+      yield put({type: 'GET_LIST'})
   } catch (err) {
       console.log('Error on delete: ', err);
       yield put({type: 'DELETE_ERROR'})

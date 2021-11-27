@@ -236,7 +236,7 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
 
   const index = req.body.index;
-  const item = Number(req.params.id)+1;
+  const item = req.params.id;
 
   console.log('in updateIndex PUT index, item', req.body, item);
 
