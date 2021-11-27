@@ -25,7 +25,6 @@ function ListPage() {
         console.log('currentItem currentIndex values ListPage', currentItem, currentIndex)  
         dispatch({type: 'SET_LIST_INDEX_ID', payload: {currentItem: currentItem.id, currentIndex:currentIndex} })
      
-        // dispatch({ type: 'SET_LIST_INDEX_ID', payload: {currentIndex:currentIndex, newItem:newItem}});
         setNewItem('');
     }
 

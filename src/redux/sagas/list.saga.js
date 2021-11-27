@@ -76,12 +76,12 @@ function* setListIndexId (action) {
   try{
 
     console.log('setListIndex in list saga', action.payload)
-    yield axios.put(`/api/lists/updateIndex/${action.payload.currentItem}`, action.payload.currentIndex)
+    yield axios.put(`/api/lists/updateIndex/${action.payload.currentItem}`, {index:action.payload.currentIndex})
     
 
     yield put({type: 'GET_LIST'})
   } catch (error) {
-    console.log('ERROR in listItemTable POST', error);
+    console.log('ERROR in setListIndexId POST', error);
     
   }
 }

@@ -235,13 +235,13 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 // Handles AXIOS request to update the last list item with a list id
 router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
 
-  const index = req.body.currentIndex;
-  const item = req.params.id
+  const index = req.body.index;
+  const item = req.params.id;
 
-  console.log('in updateIndex PUT index, item', index, item);
+  console.log('in updateIndex PUT index, item', req.body, item);
 
     const queryText = `
-    UPDATE "items" SET
+    UPDATE "items"
     SET "list_id" = $1
     WHERE "id" = $2;
     `;
