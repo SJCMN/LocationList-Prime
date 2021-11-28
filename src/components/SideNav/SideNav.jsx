@@ -19,6 +19,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import './SideNav.css';
 
+import { useSelector } from 'react-redux';
+
+
 
 const drawerWidth = 120;
 
@@ -68,6 +71,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function SideNav() {
+
+    
+    const mode = useSelector(store => store.mode);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -86,7 +92,7 @@ function SideNav() {
             position="fixed" open={open}
             id="appBar"
             >
-                <Toolbar sx={{ display: 'flex'}}>
+                <Toolbar sx={{ display: 'flex', p:1.4}}>
                     
                     <IconButton
                         color="inherit"
@@ -97,17 +103,29 @@ function SideNav() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography 
-                    variant="h5" 
-                    fontWeight="800"
-                    noWrap 
-                    component="div"  
-                    
-                    sx={{  ...(open &&  {ml:10})}}
-                    >
-                        LocationList
-                    </Typography>
+                    <Box>
+                        <Typography 
+                        variant="h5" 
+                        fontWeight="800"
+                        noWrap 
+                        component="div"  
+                        
+                        sx={{  ...(open &&  {ml:10})}}
+                        >
+                            LocationList
+                        </Typography>
+                        <Typography 
+                        variant="h7" 
+                        fontWeight="500"
+                        noWrap 
+                        component="div"  
+                        
+                        sx={{  ...(open &&  {ml:10})}}
+                        >
+                            {mode}
+                        </Typography>
 
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Drawer
