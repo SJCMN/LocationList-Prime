@@ -286,24 +286,26 @@ router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
 })
 
 // Handles AXIOS request for sort by item location from 0,0 origin reference
+// RETURNS ITEMS MATCHING CURRENT INDEX LIST ID
 // Refactor to calc distance on hide on client
-router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
+router.get('/shop/:currentIndex', rejectUnauthenticated, (req,res) => {
 
   // let shopToggle = req.params.shop
   // console.log('shop toggle is', shopToggle);
   // use item id as new 0,0
 
+    let currentIndex = req.params.currentIndex
 
-
-    // RETURN LIST SORTED BY DISTANCE
+    // RETURN LIST SORTED BY DISTANCE MATCHING LIST ID
     const queryText = `
     SELECT *
     FROM "items"
+    WHERE "list_id" = $1
     ORDER BY "items"."hidden" ASC,
     "items"."distance" ASC
     ;`
 
-  pool.query(queryText)
+  pool.query(queryText, [currentIndex])
   .then((response) => {
     console.log('TOGGLE_SHOP success');
     res.send(response.rows);  

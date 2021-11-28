@@ -34,7 +34,7 @@ function Nav() {
 
             {/* SEND USER TO ACTIVE LIST TO SHOP */}
             <Link className="navLink" to={`/lists/${currentIndex}`}
-            onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: 'SHOP' }))}
+            onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: {mode:'SHOP', currentIndex:currentIndex} }))}
             >
               Shop
             </Link>
