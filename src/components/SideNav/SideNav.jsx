@@ -10,13 +10,15 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import IconHome from '../IconHome/IconHome'
 import './SideNav.css';
 
 import { useSelector } from 'react-redux';
@@ -72,7 +74,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function SideNav() {
 
-    
+
     const mode = useSelector(store => store.mode);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -119,7 +121,7 @@ function SideNav() {
                         fontWeight="500"
                         noWrap 
                         component="div"  
-                        
+                        fontStyle="italic"
                         sx={{  ...(open &&  {ml:10})}}
                         >
                             {mode}
@@ -147,16 +149,22 @@ function SideNav() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            
-                        </ListItem>
-                    ))}
-                </List>
+                    <List>
+
+                        {['HOME', 'SHOP', 'LIST'].map(text => (
+                            <ListItem button key={text}>
+                                <ListItemIcon>
+                                    {
+                                    text === 'HOME' ? <IconHome /> : 
+                                    text === 'SHOP' ? <ShoppingCartOutlinedIcon /> :
+                                    text === 'LIST' ? <PlaylistAddOutlinedIcon /> : ''
+                                    }
+                                </ListItemIcon>
+                            </ListItem>
+                        ))}
+                     
+                        
+                    </List>
                 <Divider />
                 <List>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
