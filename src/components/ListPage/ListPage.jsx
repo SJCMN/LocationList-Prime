@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
 
+
 function ListPage() {
 
     const dispatch = useDispatch();
@@ -26,28 +27,36 @@ function ListPage() {
     return (
         <div className="container">
 
+            <Box
+            sx={{
+                pl:12,
+                m:1.8  
+            }}
+            >
             <h2>{indexName}</h2>
+            </Box>
+            
             <Box
                 sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
                     '& > :not(style)': {
-                        m: 2,
-                        //   width: 128,
-                        //   height: 128,
+                        m: .8,
                     },
                 }}
             >
                 <TextField
+                    sx={{
+                        pl:9,
+                    }}
                     placeholder="add item"
-                    label='Item'
                     id='standard-basic'
                     variant="standard"
                     value={newItem}
                     onChange={(e) => setNewItem(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && setItem()}
                 ></TextField>
-                {/* <button onClick={() => setItem()}>Add Item</button> */}
+                
                 {list &&
                     <ListMap list={list} />
                 }
