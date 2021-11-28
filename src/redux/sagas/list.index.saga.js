@@ -2,9 +2,6 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 
-
-
-
 // adds new list name to db
 function* setList(action) {
 

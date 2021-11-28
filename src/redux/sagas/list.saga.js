@@ -21,9 +21,9 @@ function* fetchItem(action) {
 
     // set list item with value from search api object
     yield put({ type: 'SET_ITEM', payload: response.data }); 
+    const getResponse = yield axios.get(`/api/lists/${currentIndex}`)
     
-    
-    yield put({type: 'GET_LIST'})
+    yield put({type: 'SET_LIST', payload: getResponse.data})
   } catch (error) {
     console.log('Item get request failed', error);
   }
@@ -101,8 +101,6 @@ function* toggleShop(action) {
     }
 
 }
-
-
 
 
 function* listSaga() {

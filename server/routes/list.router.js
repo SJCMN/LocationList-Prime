@@ -144,6 +144,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 })
 
+// Handles AXIOS request for all items on list matching list_id
+router.get('/:currentIndex', rejectUnauthenticated, (req, res) => {
+
+  const currentIndex = req.params.currentIndex
+
+  const queryText = `
+  SELECT * FROM "items"
+  WHERE "list_id" = $1
+  ORDER BY "items"."hidden" ASC,
+  "items"."id" DESC
+  ;`;
+
+  pool.query(queryText, [currentIndex])
+  .then((response) => {
+    res.send(response.rows)
+  }).catch((err) => {
+    console.log(`ERROR with GET list`, err);
+    res.sendStatus(500);
+  })
+
+})
+
 // Handles AXIOS request for delete item
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
 

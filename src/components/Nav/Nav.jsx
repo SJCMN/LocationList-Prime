@@ -5,7 +5,8 @@ import './Nav.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Nav() {
-  const user = useSelector((store) => store.user);
+  const user = useSelector(store => store.user);
+  const currentIndex = useSelector(store => store.index.currentIndex)
   const dispatch = useDispatch();
 
 
@@ -32,7 +33,7 @@ function Nav() {
             </Link>
 
             {/* SEND USER TO ACTIVE LIST TO SHOP */}
-            <Link className="navLink" to="/lists/:id"
+            <Link className="navLink" to={`/lists/${currentIndex}`}
             onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: 'SHOP' }))}
             >
               Shop
