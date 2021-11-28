@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,7 +22,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconHome from '../IconHome/IconHome'
 import './SideNav.css';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -74,7 +75,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function SideNav() {
 
-
+    const currentIndex = useSelector(store => store.index.currentIndex)
+    const dispatch = useDispatch();
     const mode = useSelector(store => store.mode);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -155,14 +157,17 @@ function SideNav() {
                             <ListItem button key={text}>
                                 <ListItemIcon>
                                     {
-                                    text === 'HOME' ? <IconHome /> : 
-                                    text === 'SHOP' ? <ShoppingCartOutlinedIcon /> :
-                                    text === 'LIST' ? <PlaylistAddOutlinedIcon /> : ''
+                                    text === 'HOME' ? <Link to="/home"><IconHome /></Link> : 
+                                    text === 'SHOP' ? <Link to={`/lists/${currentIndex}`}><ShoppingCartOutlinedIcon 
+                                    onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: {mode:'SHOP', currentIndex:currentIndex} }))}/>
+                                    </Link> :
+                                    text === 'LIST' ? <Link to="/lists"><AssignmentOutlinedIcon 
+                                    onClick={() =>  (dispatch({ type: "TOGGLE_LIST_MODE", payload: 'LIST' }))}/>
+                                    </Link> : ''
                                     }
                                 </ListItemIcon>
                             </ListItem>
                         ))}
-                     
                         
                     </List>
                 <Divider />
@@ -184,3 +189,4 @@ function SideNav() {
 }
 
 export default SideNav;
+
