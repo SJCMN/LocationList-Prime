@@ -12,11 +12,12 @@ function calcDistance(x,y) {
   }
 
 // Handles AXIOS request for API information using keyword and TCIN search if user is authenticated
-router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
+router.get('/keyword/:searchTerm/:currentIndex', rejectUnauthenticated, (req, res) => {
   
 
     let searchTerm = req.params.searchTerm
-    console.log('in searchTerm GET', searchTerm)
+    let currentIndex = req.params.currentIndex
+    console.log('in searchTerm GET', searchTerm, currentIndex)
 
     const options = {
         method: 'GET',
@@ -61,7 +62,7 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
             console.log('server v3 request response:',response.data.data);
 
             const itemObject = response.data.data;
-
+            // this will crash on some items like 'gravy' when missing object key
             // format data for store and db
             const foundItem  = {
                 keyword_search: searchTerm,
@@ -91,8 +92,9 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                   "x", 
                   "y", 
                   "department_id", 
-                  "distance")
-                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9);
+                  "distance",
+                  "list_id")
+                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
                 `;
 
                 const values = [
@@ -104,7 +106,8 @@ router.get('/keyword/:searchTerm', rejectUnauthenticated, (req, res) => {
                     foundItem.x,
                     foundItem.y,
                     foundItem.department_id,
-                    distance
+                    distance,
+                    currentIndex
                 ];
 
     pool.query(queryText, values)
@@ -138,6 +141,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       console.log(`ERROR with GET list`, err);
       res.sendStatus(500);
     })
+
+})
+
+// Handles AXIOS request for all items on list matching list_id
+router.get('/:currentIndex', rejectUnauthenticated, (req, res) => {
+
+  const currentIndex = req.params.currentIndex
+
+  const queryText = `
+  SELECT * FROM "items"
+  WHERE "list_id" = $1
+  ORDER BY "items"."hidden" ASC,
+  "items"."id" DESC
+  ;`;
+
+  pool.query(queryText, [currentIndex])
+  .then((response) => {
+    res.send(response.rows)
+  }).catch((err) => {
+    console.log(`ERROR with GET list`, err);
+    res.sendStatus(500);
+  })
 
 })
 
@@ -232,25 +257,55 @@ router.put('/update', rejectUnauthenticated, (req,res) => {
 
 })
 
+// Handles AXIOS request to update the last list item with a list id
+// REFACTOR THIS CODE TO BE USED TO UPDATE AN ITEM TO ANOTHER LIST
+router.put('/updateIndex/:id', rejectUnauthenticated, (req,res) => {
+
+  const index = req.body.index;
+  const item = req.params.id;
+
+  console.log('in updateIndex PUT index, item', req.body, item);
+
+    const queryText = `
+    UPDATE "items"
+    SET "list_id" = $1
+    WHERE "id" = $2;
+    `;
+
+  const values = [index, item]
+
+  pool.query(queryText, values)
+  .then((result) => {
+    console.log('Update list_id success');
+    res.sendStatus(200);    
+  }).catch((err) => {
+    console.log('Update list_id error', err);
+    res.sendStatus(500);    
+  })
+
+})
+
 // Handles AXIOS request for sort by item location from 0,0 origin reference
+// RETURNS ITEMS MATCHING CURRENT INDEX LIST ID
 // Refactor to calc distance on hide on client
-router.get('/shop/:shop', rejectUnauthenticated, (req,res) => {
+router.get('/shop/:currentIndex', rejectUnauthenticated, (req,res) => {
 
   // let shopToggle = req.params.shop
   // console.log('shop toggle is', shopToggle);
   // use item id as new 0,0
 
+    let currentIndex = req.params.currentIndex
 
-
-    // RETURN LIST SORTED BY DISTANCE
+    // RETURN LIST SORTED BY DISTANCE MATCHING LIST ID
     const queryText = `
     SELECT *
     FROM "items"
+    WHERE "list_id" = $1
     ORDER BY "items"."hidden" ASC,
     "items"."distance" ASC
     ;`
 
-  pool.query(queryText)
+  pool.query(queryText, [currentIndex])
   .then((response) => {
     console.log('TOGGLE_SHOP success');
     res.send(response.rows);  
