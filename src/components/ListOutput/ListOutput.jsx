@@ -43,7 +43,7 @@ function ListOutput({ item }) {
       secondaryAction={
         <IconButton
           edge="end" aria-label="delete"
-          onClick={() => (dispatch({ type: "DELETE_ITEM", payload: item.id }))}
+          onClick={() => (dispatch({ type: "DELETE_ITEM", payload: {id:item.id, currentIndex:currentIndex}}))}
         >
           <HighlightOffIcon />
 

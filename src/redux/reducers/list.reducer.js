@@ -9,19 +9,13 @@ const listReducer = (state = [], action) => {
 
             const index = action.payload;
             const namedList = state.filter(item => item.list_id === index)
-            console.log('in list reducer SORT_BY_LIST_NAME index:', index, namedList)
-
             return namedList;
-
 
         case 'UPDATE_DISTANCE':
             // UPDATE DISTANCE VALUES IN LIST STORE ONLY
             // CALC DISTANCE HERE
             let sortedList = [...state]
             const { id } = action.payload
-
-            console.log('in list reducer id:', id);
-
 
             let currentX;
             let currentY;
@@ -35,14 +29,14 @@ const listReducer = (state = [], action) => {
                 }
             }
 
-            console.log('in updateDistance new origin', currentX, currentY);
+            // console.log('in updateDistance new origin', currentX, currentY);
 
             // filter out unhidden items from list to evaluate new distance
             // filter out hidden items to be added back into list after distance calc
 
             const unhiddenlistItems = sortedList.filter(item => item.hidden === false)
             const hiddenItems = sortedList.filter(item => item.hidden === true)
-            console.log('sorted list filtered by hidden value', unhiddenlistItems, hiddenItems)
+            // console.log('sorted list filtered by hidden value', unhiddenlistItems, hiddenItems)
 
             // recalculate distance values based on last item origin
             // update list object with revised x,y values
@@ -64,7 +58,7 @@ const listReducer = (state = [], action) => {
                 // calculate X Y coordinates from 0,0 to establish initial distance value
                 // value from distance is spread back into foundItem in res.send
                 distance = calcDistance()
-                console.log('new origin calcDistance', listItem.keyword_search, distance);
+                // console.log('new origin calcDistance', listItem.keyword_search, distance);
                 // as each item is passed into the loop, the distance key is updated
                 listItem.distance = distance
 
@@ -73,7 +67,7 @@ const listReducer = (state = [], action) => {
             // sort the object array by distance, return new list
             unhiddenlistItems.sort((a, b) => a.distance - b.distance)
 
-            console.log('list sorted by distance from last hidden item', unhiddenlistItems, hiddenItems);
+            // console.log('list sorted by distance from last hidden item', unhiddenlistItems, hiddenItems);
 
             return [...unhiddenlistItems, ...hiddenItems];
 

@@ -13,9 +13,7 @@ function* fetchItem(action) {
   try {
     let searchTerm = action.payload.newItem
     let currentIndex = action.payload.currentIndex
-    console.log('in fetchItem list saga currentIndex:', currentIndex)
-    // add list id here
-    // console.log('searchTerms in fetchItem saga', searchTerm);
+
     // send search term to the list router
     const response = yield axios.get(`/api/lists/keyword/${searchTerm}/${currentIndex}`, config);
     // set list item with value from search api object
@@ -49,9 +47,11 @@ function* fetchList() {
 
 // Deletes one item based on id
 function* deleteItem(action) {
+  const currentIndex = action.payload.currentIndex
   try {
-    yield axios.delete(`/api/lists/${action.payload}`);
-    yield put({ type: 'GET_LIST' })
+    yield axios.delete(`/api/lists/${action.payload.id}`);
+    const response = yield axios.get(`/api/lists/shop/${currentIndex}`);
+    yield put({ type: 'SET_LIST', payload: response.data });
   } catch (err) {
     console.log('Error on delete: ', err);
     yield put({ type: 'DELETE_ERROR' })
