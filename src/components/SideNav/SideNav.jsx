@@ -82,6 +82,11 @@ function SideNav() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
+    const handleCurrentIndex = (item) => {
+        dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
+        dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+      }
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -176,8 +181,11 @@ function SideNav() {
                 <List>
 
                     {listIndex.map((item) => (
-                        <ListItem button key={item.id}>
-
+                        <ListItem 
+                        button 
+                        key={item.id}
+                        onClick={() => handleCurrentIndex(item)}
+                        >
                             <Typography
                                 component="div"
                             >
