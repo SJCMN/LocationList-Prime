@@ -1,0 +1,9 @@
+#userButton {
+    background: var(--independence);
+    border-color: var(--cultured)
+}
+
+#userButton:hover {
+    background: var(--apricot);
+    border-color: var(--independence)
+}
