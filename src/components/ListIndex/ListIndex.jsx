@@ -22,21 +22,29 @@ function ListIndex() {
     return (
         <div className="container">
 
-            <h2>LISTS</h2>
+            <Box
+            sx={{
+                mx:'auto',  
+                width: 'auto' ,
+                textAlign: 'center'
+            }}
+            >
+            <h2>Lists</h2>
+            </Box>
             <Box
                 sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
                     '& > :not(style)': {
-                        m: 2,
-                        //   width: 128,
-                        //   height: 128,
+                        m: .8,
                     },
                 }}
             >
                 <TextField
+                    sx={{
+                        pl:9,
+                    }}
                     placeholder="add list"
-                    label='newList'
                     id='standard-basic'
                     variant="standard"
                     value={newList}
@@ -47,7 +55,7 @@ function ListIndex() {
                 {listIndex &&
                     <IndexMap list={listIndex} />
                 }
-                <Paper elevation={0} />
+                
             </Box>
         </div>
     );
