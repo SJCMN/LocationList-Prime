@@ -6,8 +6,6 @@ import {
   Switch,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Nav from '../Nav/Nav';
-import SideNav from '../SideNav/SideNav'
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
@@ -26,18 +24,11 @@ function AppBody() {
 
   const user = useSelector(store => store.user);
 
-  // useEffect hook
-  // component renders when state changes
-  // code within useEffect() function runs when component renders
-  // providing an empty array as a second argument will limit the useEffect to only run once
-  // passing in a variable into the array as a second argument 
-  // Will run contents of use effect when variable value changes
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_LIST_INDEX' })
 
-    // console.log('use effect in App ran');
   }, []);
 
   return (
@@ -47,14 +38,14 @@ function AppBody() {
           <Redirect exact from="/" to="/home" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
-          {/* about page hidden */}
-          {/* <Route
+
+          <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/about"
           >
             <AboutPage />
-          </Route> */}
+          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
