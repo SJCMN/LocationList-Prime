@@ -76,10 +76,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function SideNav() {
 
     const currentIndex = useSelector(store => store.index.currentIndex)
+    const listIndex = useSelector(store => store.index.indexReducer);
     const dispatch = useDispatch();
     const mode = useSelector(store => store.mode);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -92,12 +94,12 @@ function SideNav() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar 
-            position="fixed" open={open}
-            id="appBar"
+            <AppBar
+                position="fixed" open={open}
+                id="appBar"
             >
-                <Toolbar sx={{ display: 'flex', p:1.4}}>
-                    
+                <Toolbar sx={{ display: 'flex', p: 1.4 }}>
+
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -108,23 +110,23 @@ function SideNav() {
                         <MenuIcon />
                     </IconButton>
                     <Box>
-                        <Typography 
-                        variant="h5" 
-                        fontWeight="800"
-                        noWrap 
-                        component="div"  
-                        
-                        sx={{  ...(open &&  {ml:10})}}
+                        <Typography
+                            variant="h5"
+                            fontWeight="800"
+                            noWrap
+                            component="div"
+
+                            sx={{ ...(open && { ml: 10 }) }}
                         >
                             LocationList
                         </Typography>
-                        <Typography 
-                        variant="h7" 
-                        fontWeight="500"
-                        noWrap 
-                        component="div"  
-                        fontStyle="italic"
-                        sx={{  ...(open &&  {ml:10})}}
+                        <Typography
+                            variant="h7"
+                            fontWeight="500"
+                            noWrap
+                            component="div"
+                            fontStyle="italic"
+                            sx={{ ...(open && { ml: 10 }) }}
                         >
                             {mode}
                         </Typography>
@@ -151,33 +153,42 @@ function SideNav() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                    <List>
-
-                        {['HOME', 'SHOP', 'LIST'].map(text => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>
-                                    {
-                                    text === 'HOME' ? <Link to="/home"><IconHome /></Link> : 
-                                    text === 'SHOP' ? <Link to={`/lists/${currentIndex}`}><ShoppingCartOutlinedIcon 
-                                    onClick={() =>  (dispatch({ type: "TOGGLE_SHOP_MODE", payload: {mode:'SHOP', currentIndex:currentIndex} }))}/>
-                                    </Link> :
-                                    text === 'LIST' ? <Link to="/lists"><AssignmentOutlinedIcon 
-                                    onClick={() =>  (dispatch({ type: "TOGGLE_LIST_MODE", payload: 'LIST' }))}/>
-                                    </Link> : ''
-                                    }
-                                </ListItemIcon>
-                            </ListItem>
-                        ))}
-                        
-                    </List>
-                <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+
+                    {['HOME', 'SHOP', 'LIST'].map(text => (
                         <ListItem button key={text}>
-                            
-                            <ListItemText primary={text} />
+                            <ListItemIcon>
+                                {
+                                    text === 'HOME' ? <Link to="/home"><IconHome /></Link> :
+                                        text === 'SHOP' ? <Link to={`/lists/${currentIndex}`}><ShoppingCartOutlinedIcon
+                                            onClick={() => (dispatch({ type: "TOGGLE_SHOP_MODE", payload: { mode: 'SHOP', currentIndex: currentIndex } }))} />
+                                        </Link> :
+                                            text === 'LIST' ? <Link to="/lists"><AssignmentOutlinedIcon
+                                                onClick={() => (dispatch({ type: "TOGGLE_LIST_MODE", payload: 'LIST' }))} />
+                                            </Link> : ''
+                                }
+                            </ListItemIcon>
                         </ListItem>
                     ))}
+
+                </List>
+                <Divider />
+                <List>
+
+                    {listIndex.map((item) => (
+                        <ListItem button key={item.id}>
+
+                            <Typography
+                                component="div"
+                            >
+                                <Box
+                                    sx={currentIndex === item.id ? { fontWeight: 'bold' } : { fontWeight: 'regular' }}
+                                >{item.list_name}</Box>
+                            </Typography>
+
+                        </ListItem>
+                    ))}
+
                 </List>
             </Drawer>
             <Main open={open}>
