@@ -19,14 +19,16 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import ListIndex from '../ListIndex/ListIndex'
 import IconHome from '../IconHome/IconHome'
+import AppBody from '../AppBody/AppBody'
 import './SideNav.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 
 
-const drawerWidth = 110;
+const drawerWidth = 100;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -188,6 +190,7 @@ function SideNav() {
                         >
                             <Typography
                                 component="div"
+                                variant="body2"
                             >
                                 <Box
                                     sx={currentIndex === item.id ? { fontWeight: 'bold' } : { fontWeight: 'regular' }}
@@ -201,7 +204,8 @@ function SideNav() {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-
+                {/* <ListIndex /> */}
+                <AppBody />
             </Main>
         </Box>
     );

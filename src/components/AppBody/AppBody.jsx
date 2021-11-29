@@ -19,12 +19,12 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ListPage from '../ListPage/ListPage';
 import StorePage from '../StorePage/StorePage';
 import ListIndex from '../ListIndex/ListIndex'
-import './App.css';
+// import './App.css';
 
-function App() {
+function AppBody() {
   const dispatch = useDispatch();
 
-  // const user = useSelector(store => store.user);
+  const user = useSelector(store => store.user);
 
   // useEffect hook
   // component renders when state changes
@@ -42,13 +42,9 @@ function App() {
 
   return (
     <Router>
-      <div>
-      <SideNav />
-        {/* <Nav /> */}
-        
-        {/* <Switch> */}
+        <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          {/* <Redirect exact from="/" to="/home" /> */}
+          <Redirect exact from="/" to="/home" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           {/* about page hidden */}
@@ -64,49 +60,49 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/lists"
           >
             <ListIndex />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/lists/:id"
           >
             <ListPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/stores"
           >
             <StorePage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
 
-          {/* <Route
+          <Route
             exact
             path="/login"
           >
@@ -118,8 +114,8 @@ function App() {
               // Otherwise, show the login page
               <LoginPage />
             }
-          </Route> */}
-{/* 
+          </Route>
+
           <Route
             exact
             path="/registration"
@@ -132,9 +128,9 @@ function App() {
               // Otherwise, show the registration page
               <RegisterPage />
             }
-          </Route> */}
+          </Route>
 
-          {/* <Route
+          <Route
             exact
             path="/home"
           >
@@ -146,17 +142,15 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
-          </Route> */}
+          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
-          {/* <Route>
+          <Route>
             <h1>404</h1>
-          </Route> */}
-        {/* </Switch> */}
-        {/* <Footer /> */}
-      </div>
+          </Route>
+        </Switch>
     </Router>
   );
 }
 
-export default App;
+export default AppBody;
