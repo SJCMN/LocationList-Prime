@@ -86,7 +86,7 @@ function SideNav() {
     const handleCurrentIndex = (item) => {
         dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
         dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-      }
+    }
 
 
     const handleDrawerOpen = () => {
@@ -182,10 +182,10 @@ function SideNav() {
                 <List>
 
                     {listIndex.map((item) => (
-                        <ListItem 
-                        button 
-                        key={item.id}
-                        onClick={() => handleCurrentIndex(item)}
+                        <ListItem
+                            button
+                            key={item.id}
+                            onClick={() => handleCurrentIndex(item)}
                         >
                             <Typography
                                 component="div"

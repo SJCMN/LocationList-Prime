@@ -29,8 +29,9 @@ function ListPage() {
 
             <Box
             sx={{
-                pl:12,
-                m:1.8  
+                mx:'auto',  
+                width: 'auto' ,
+                textAlign: 'center' 
             }}
             >
             <h2>{indexName}</h2>

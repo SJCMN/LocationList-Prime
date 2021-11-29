@@ -24,8 +24,9 @@ function ListIndex() {
 
             <Box
             sx={{
-                pl:16,
-                m:1.8   
+                mx:'auto',  
+                width: 'auto' ,
+                textAlign: 'center'
             }}
             >
             <h2>Lists</h2>
@@ -54,7 +55,7 @@ function ListIndex() {
                 {listIndex &&
                     <IndexMap list={listIndex} />
                 }
-                <Paper elevation={0} />
+                
             </Box>
         </div>
     );
