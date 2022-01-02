@@ -1,5 +1,6 @@
 {
-  "name": "prime-solo-project",
+  "name": "locationlist",
+  "homepage": "locationlist.ccllcdev.com",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
