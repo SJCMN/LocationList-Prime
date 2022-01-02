@@ -89,7 +89,7 @@ function SideNav() {
 
         dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
         dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-        // dispatch({ type: 'GET_LIST' })
+        dispatch({ type: 'GET_LIST' })
         if (currentIndex !== item.id){
             setTimeout(() => {
             dispatch({ type: 'SORT_BY_LIST_NAME', payload: item.id }) 
