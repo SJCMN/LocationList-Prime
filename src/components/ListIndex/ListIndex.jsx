@@ -23,13 +23,13 @@ function ListIndex() {
         <div className="container">
 
             <Box
-            sx={{
-                mx:'auto',  
-                width: 'auto' ,
-                textAlign: 'center'
-            }}
+                sx={{
+                    mx: 'auto',
+                    width: 'auto',
+                    textAlign: 'center'
+                }}
             >
-            <h2>Lists</h2>
+                <h2>Lists</h2>
             </Box>
             <Box
                 sx={{
@@ -42,7 +42,7 @@ function ListIndex() {
             >
                 <TextField
                     sx={{
-                        pl:9,
+                        pl: 9,
                     }}
                     placeholder="add list"
                     id='standard-basic'
@@ -55,7 +55,7 @@ function ListIndex() {
                 {listIndex &&
                     <IndexMap list={listIndex} />
                 }
-                
+
             </Box>
         </div>
     );

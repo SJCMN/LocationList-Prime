@@ -33,7 +33,7 @@ function ListOutput({ item }) {
 
     } //END OF SHOP MODE LOGIC
     else {
-      dispatch({ type: "TOGGLE_HIDE_ITEM", payload: {id:item.id, currentIndex:currentIndex} })
+      dispatch({ type: "TOGGLE_HIDE_ITEM", payload: { id: item.id, currentIndex: currentIndex } })
     }
   }
 
@@ -43,7 +43,7 @@ function ListOutput({ item }) {
       secondaryAction={
         <IconButton
           edge="end" aria-label="delete"
-          onClick={() => (dispatch({ type: "DELETE_ITEM", payload: {id:item.id, currentIndex:currentIndex}}))}
+          onClick={() => (dispatch({ type: "DELETE_ITEM", payload: { id: item.id, currentIndex: currentIndex } }))}
         >
           <HighlightOffIcon />
 
