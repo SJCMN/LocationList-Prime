@@ -1,4 +1,3 @@
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -11,7 +10,6 @@ import { useHistory } from 'react-router-dom'
 
 
 import { useDispatch, useSelector } from 'react-redux';
-// import './ListOutput.css'
 
 
 function IndexOutput({ item }) {
@@ -20,8 +18,6 @@ function IndexOutput({ item }) {
   const currentIndex = useSelector(store => store.index.currentIndex)
   const dispatch = useDispatch();
   const history = useHistory()
-  const accent = blueGrey['900']
-
 
 
   // List Mode: Toggles hidden to archive items on list
@@ -32,16 +28,20 @@ function IndexOutput({ item }) {
   }
 
   const sendToList = () => {
+
+
+
     dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
     dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-    dispatch({ type: 'SORT_BY_LIST_NAME', payload: currentIndex})
+    dispatch({ type: 'SORT_BY_LIST_NAME', payload: currentIndex })
+
+    
     history.push(`/lists/${item.id}`)
   }
 
 
   return (
     <ListItem key={item.id}
-      // className={item.hidden === false ? "standard" : "hidden"}
       secondaryAction={
         <IconButton
           edge="end" aria-label="delete"
@@ -55,7 +55,7 @@ function IndexOutput({ item }) {
     >
 
       <ListItemButton
-        onClick={() => handleCurrentIndex(item)}
+        // onClick={() => handleCurrentIndex(item)}
         dense>
         <ListItemIcon>
           <Checkbox
