@@ -5,7 +5,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { blueGrey } from '@mui/material/colors'
 import { useHistory } from 'react-router-dom'
 
 
@@ -29,13 +28,9 @@ function IndexOutput({ item }) {
 
   const sendToList = () => {
 
-
-
     dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
     dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
-    dispatch({ type: 'SORT_BY_LIST_NAME', payload: currentIndex })
 
-    
     history.push(`/lists/${item.id}`)
   }
 

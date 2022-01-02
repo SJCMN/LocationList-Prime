@@ -84,8 +84,22 @@ function SideNav() {
     const [open, setOpen] = React.useState(false);
 
     const handleCurrentIndex = (item) => {
+
+        console.log('in SideNav before SET_SELECTED_INDEX', currentIndex)
+
         dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
         dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+        // dispatch({ type: 'GET_LIST' })
+        if (currentIndex !== item.id){
+            setTimeout(() => {
+            dispatch({ type: 'SORT_BY_LIST_NAME', payload: item.id }) 
+            }, 300);
+        
+        }
+       
+
+        console.log('in SideNav after SET_SELECTED_INDEX', currentIndex)
+
     }
 
 
