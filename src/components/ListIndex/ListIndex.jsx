@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import IndexMap from '../IndexMap/IndexMap';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
 
@@ -23,13 +22,13 @@ function ListIndex() {
         <div className="container">
 
             <Box
-            sx={{
-                mx:'auto',  
-                width: 'auto' ,
-                textAlign: 'center'
-            }}
+                sx={{
+                    mx: 'auto',
+                    width: 'auto',
+                    textAlign: 'center'
+                }}
             >
-            <h2>Lists</h2>
+                <h2>Lists</h2>
             </Box>
             <Box
                 sx={{
@@ -42,7 +41,7 @@ function ListIndex() {
             >
                 <TextField
                     sx={{
-                        pl:9,
+                        pl: 9,
                     }}
                     placeholder="add list"
                     id='standard-basic'
@@ -55,7 +54,7 @@ function ListIndex() {
                 {listIndex &&
                     <IndexMap list={listIndex} />
                 }
-                
+
             </Box>
         </div>
     );

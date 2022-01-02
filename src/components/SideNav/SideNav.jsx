@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -75,7 +75,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function SideNav() {
-
+    const history = useHistory()
     const currentIndex = useSelector(store => store.index.currentIndex)
     const listIndex = useSelector(store => store.index.indexReducer);
     const dispatch = useDispatch();
@@ -84,8 +84,17 @@ function SideNav() {
     const [open, setOpen] = React.useState(false);
 
     const handleCurrentIndex = (item) => {
+
         dispatch({ type: 'SET_SELECTED_INDEX', payload: item.id })
         dispatch({ type: 'SET_SELECTED_INDEX_NAME', payload: item.list_name })
+        dispatch({ type: 'GET_LIST' })
+        if (currentIndex !== item.id){
+            setTimeout(() => {
+            dispatch({ type: 'SORT_BY_LIST_NAME', payload: item.id }) 
+            }, 300);
+
+        }
+
     }
 
 
@@ -203,7 +212,6 @@ function SideNav() {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                {/* <ListIndex /> */}
                 <AppBody />
             </Main>
         </Box>
